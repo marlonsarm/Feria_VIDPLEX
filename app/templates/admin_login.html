@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Ingresar · Panel VidPlex{% endblock %}
+{% block content %}
+<div class="admin-login-bg"></div>
+<div class="wrap admin-login-wrap">
+  <a href="/" class="marca admin-login-marca">
+    <span class="marca-texto"><span class="letra">V</span><span class="letra">I</span><span class="letra">D</span><span class="letra">P</span><span class="letra">L</span><span class="letra">E</span><span class="letra">X</span></span>
+    <span class="chispita"></span>
+    <span class="puntos"><span></span><span></span><span></span></span>
+  </a>
+
+  <div class="card admin-login-card">
+    <h2>Panel de administración</h2>
+    <p class="hint">Acceso restringido al equipo VidPlex.</p>
+
+    {% if error %}
+    <div class="aviso-offline show" style="color:#E4572E; border-color:rgba(228,87,46,0.4);">{{ error }}</div>
+    {% endif %}
+
+  <form method="POST" class="admin-login-form">
+           <div class="field">
+        <label for="correo">Correo</label>
+        <input type="email" name="correo" id="correo" autocomplete="email" required>
+      </div>
+      <div class="field">
+        <label for="password">Contraseña</label>
+        <input type="password" name="password" id="password" autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="submit-btn">Ingresar</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

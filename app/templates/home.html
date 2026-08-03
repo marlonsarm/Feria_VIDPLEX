@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>VidPlex</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --negro:#2A241E; --negro-2:#332C24; --negro-3:#3D352B;
+  --blanco:#FFFFFF; --gris:#B3A99B; --gris-linea:rgba(255,255,255,0.14);
+   --acento:#C0C5CE; --acento-suave:rgba(192,197,206,0.14);
+  --radio:10px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{overflow-x:hidden;width:100%;touch-action:manipulation;}
+.nav-main{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:24px 50px;
+  max-width:1300px; margin:0 auto; width:100%;
+  min-width:0;
+  position:relative;
+  overflow:hidden;
+}
+body{
+  background:var(--negro); color:var(--blanco); font-family:'Inter',sans-serif;
+  padding-top:140px; overflow-x:hidden;
+  background-image:
+    radial-gradient(circle at 15% 0%, rgba(228,87,46,0.18), transparent 45%),
+    radial-gradient(circle at 100% 30%, rgba(255,255,255,0.07), transparent 40%),
+    radial-gradient(circle at 50% 100%, rgba(228,87,46,0.10), transparent 55%);
+  background-size:auto;
+  background-position:0 0;
+}
+
+body::before{
+  content:""; position:fixed; inset:0; z-index:-1;
+  background:linear-gradient(180deg, rgba(42,36,30,0.55) 0%, rgba(42,36,30,0.4) 50%, rgba(42,36,30,0.55) 100%);
+  pointer-events:none;
+}
+
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px;}
+
+.topbar{
+  position:fixed; top:0; left:0; right:0; z-index:1000;
+  display:flex; flex-direction:column;
+  padding:0;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  background:linear-gradient(180deg, rgba(5,5,5,0.97) 0%, rgba(10,10,10,0.92) 50%, rgba(15,15,15,0.88) 100%);
+  backdrop-filter:blur(32px) saturate(220%);
+  -webkit-backdrop-filter:blur(32px) saturate(220%);
+  transition:all .4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.topbar::before{
+  content:""; position:absolute; inset:0; z-index:-1;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(228,87,46,0.15), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(228,87,46,0.08), transparent);
+  pointer-events:none;
+}
+.nav-main{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:24px 50px;
+  max-width:1300px; margin:0 auto; width:100%;
+  min-width:0;
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(180deg, rgba(228,87,46,0.10) 0%, rgba(228,87,46,0.03) 60%, transparent 100%);
+  border-radius:0 0 20px 20px;
+}
+/* Destello que solo brilla en las letras - llega hasta PROYECTOS */
+.nav-main::before{
+  content:""; position:absolute; top:0; left:-40%; width:35%; height:100%;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255,255,255,0) 15%,
+    rgba(255,255,255,0.2) 30%,
+    rgba(255,255,255,0.7) 45%,
+    rgba(255,255,255,0.9) 50%,
+    rgba(255,255,255,0.7) 55%,
+    rgba(255,255,255,0.2) 70%,
+    rgba(255,255,255,0) 85%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  animation: shineNav 6s ease-in-out infinite;
+  pointer-events:none;
+  z-index:2;
+  mix-blend-mode: overlay;
+}
+@keyframes shineNav{
+  0%{left:-40%;}
+  25%{left:90%;}
+  100%{left:90%;}
+}
+
+.nav-main::after{
+  content:""; position:absolute; bottom:0; left:50%; transform:translateX(-50%);
+  width:90%; height:1px;
+  background:linear-gradient(90deg, transparent, rgba(228,87,46,0.3), transparent);
+}
+.nav-info{
+  display:flex; justify-content:center; gap:40px;
+  padding:12px 50px;
+  background:rgba(228,87,46,0.06);
+  border-top:1px solid rgba(228,87,46,0.12);
+  font-size:.74rem; color:var(--gris);
+  letter-spacing:.05em;
+  font-weight:500;
+  transition:all .3s ease, max-height .35s ease, opacity .3s ease, padding .3s ease;
+  max-height:60px;
+  overflow:hidden;
+}
+
+.nav-info span{display:flex; align-items:center; gap:8px;}
+.topbar.scrolled .nav-info{
+  max-height:0;
+  padding-top:0;
+  padding-bottom:0;
+  opacity:0;
+  border-top-color:transparent;
+  pointer-events:none;
+}
+.nav-info span::before{
+  content:""; display:inline-block; width:4px; height:4px; border-radius:50%; background:var(--acento); opacity:.6;
+}
+.nav-actions{display:flex; gap:14px; align-items:center;}
+.btn-wa{
+  background:linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color:#fff; font-size:.8rem; font-weight:700;
+  padding:12px 22px; border-radius:999px; text-decoration:none;
+  border:1px solid rgba(255,255,255,0.1);
+  box-shadow:0 4px 15px rgba(37,211,102,0.2);
+  transition:all .3s cubic-bezier(0.4, 0, 0.2, 1);
+  display:flex; align-items:center; gap:6px;
+}
+.btn-wa:hover{
+  transform:translateY(-2px) scale(1.02);
+  box-shadow:0 8px 25px rgba(37,211,102,0.35);
+  border-color:rgba(255,255,255,0.2);
+}
+.btn-cotizar{
+  background:#E4572E;
+  color:#fff; font-size:.8rem; font-weight:700;
+  padding:12px 24px; border-radius:999px; text-decoration:none;
+  border:1px solid rgba(255,255,255,0.1);
+  box-shadow:0 4px 15px var(--acento-suave);
+  transition:all .3s cubic-bezier(0.4, 0, 0.2, 1);
+  position:relative; overflow:hidden;
+}
+.btn-cotizar::before{
+  content:""; position:absolute; top:0; left:-100%; width:100%; height:100%;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition:left .5s ease;
+}
+.btn-cotizar:hover{
+  transform:translateY(-2px) scale(1.02);
+  box-shadow:0 8px 25px rgba(228,87,46,0.3);
+  border-color:rgba(255,255,255,0.2);
+}
+.btn-cotizar:hover::before{left:100%;}
+.marca{
+  display:flex;align-items:center;gap:14px;text-decoration:none; position:relative;
+}
+.marca::after{
+  content:""; position:absolute; right:-20px; top:50%; transform:translateY(-50%);
+  width:1px; height:30px; background:linear-gradient(180deg, transparent, var(--gris-linea), transparent);
+}
+/* Detalle propio VidPlex — brillo sutil en letras */
+.marca-texto{
+  font-family:'Archivo Black',sans-serif; font-size:2.2rem;
+  letter-spacing:.08em;
+  position:relative;
+  color: transparent;
+background-image:
+    linear-gradient(75deg, transparent 42%, rgba(255,255,255,0.95) 49%, rgba(255,255,255,0.95) 51%, transparent 58%),
+    linear-gradient(180deg, #d5dce1 0%, #d5dce1 4%, #7c8d99 12%, #4a5966 35%, #3d4a54 55%, #5c6b76 80%, #6b7c88 100%);
+  background-size: 250% 100%, 100% 100%;
+  background-position: -100% 0, 0 0;
+  background-blend-mode: overlay, normal;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+ -webkit-text-stroke: 1.5px #5a6570;
+  text-shadow:
+    0 1px 0 #c5cdd3,
+    0 -1px 1px #3a3a3a,
+    0 2px 4px rgba(0,0,0,0.6);
+  animation: brilloVidrio 3s ease-in-out infinite, brilloDeslizante 4.5s ease-in-out infinite;
+}
+@keyframes brilloVidrio{
+  0%,100%{
+    filter: brightness(1) drop-shadow(0 0 2px rgba(255,255,255,0.1));
+  }
+  50%{
+    filter: brightness(1.15) drop-shadow(0 0 8px rgba(255,255,255,0.25));
+  }
+}
+@keyframes brilloDeslizante{
+  0%,80%{ background-position: -100% 0, 0 0; }
+  100%{ background-position: 200% 0, 0 0; }
+}
+
+
+/* Ola de brillo letra por letra */
+.marca-texto .letra{
+  display:inline-block;
+  animation: letraOla 4.5s ease-in-out infinite;
+}
+.marca-texto .letra:nth-child(1){animation-delay:0.00s;}
+.marca-texto .letra:nth-child(2){animation-delay:0.08s;}
+.marca-texto .letra:nth-child(3){animation-delay:0.16s;}
+.marca-texto .letra:nth-child(4){animation-delay:0.24s;}
+.marca-texto .letra:nth-child(5){animation-delay:0.32s;}
+.marca-texto .letra:nth-child(6){animation-delay:0.40s;}
+.marca-texto .letra:nth-child(7){animation-delay:0.48s;}
+@keyframes letraOla{
+  0%,100%{
+    transform:translateY(0);
+    filter:brightness(1);
+  }
+}
+
+/* Chispita estilo sparkle premium - titila cerca del logo */
+.chispita{
+  position:absolute; top:-8px; right:-12px; width:12px; height:12px;
+  pointer-events:none; z-index:3; opacity:0;
+  background:radial-gradient(circle, #fff 0%, #e8e8e8 40%, transparent 75%);
+  clip-path:polygon(50% 0%, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0% 50%, 39% 39%);
+  filter:drop-shadow(0 0 4px rgba(255,255,255,0.7));
+  animation: chispitaTitila 4.5s ease-in-out infinite;
+}
+@keyframes chispitaTitila{
+  0%,85%,100%{opacity:0; transform:scale(.2) rotate(0deg);}
+  90%{opacity:1; transform:scale(1) rotate(45deg);}
+  95%{opacity:.5; transform:scale(.7) rotate(60deg);}
+}
+
+/* Línea plateada efecto vidrio templado */
+.marca-texto::after{
+  content:""; position:absolute; bottom:-2px; left:-5%; right:-5%; height:2px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(192,192,192,0.3) 15%,
+    rgba(255,255,255,0.8) 30%,
+    rgba(220,220,220,0.9) 45%,
+    rgba(255,255,255,0.8) 60%,
+    rgba(192,192,192,0.3) 75%,
+    transparent 100%
+  );
+  opacity:0.8;
+  box-shadow: 
+    0 1px 6px rgba(255,255,255,0.2),
+    0 -1px 3px rgba(255,255,255,0.05) inset;
+}
+@keyframes shineLogo{
+  0%{left:-100%;}
+  20%{left:150%;}
+  100%{left:150%;}
+}
+
+.puntos{display:flex;gap:5px; position:absolute; top:-7px; right:2px;}
+
+.puntos span{
+  width:6.5px;height:6.5px;border-radius:50%;
+  position:relative; overflow:visible;
+  background: radial-gradient(circle at 30% 25%, rgba(255,255,255,0.95), var(--c) 45%, var(--cd) 100%);
+  box-shadow:
+    0 0 3px 0.5px var(--c),
+    inset 0 -2px 3px rgba(0,0,0,0.4),
+    inset 0 1px 1px rgba(255,255,255,0.5);
+    animation: puntoPulso 2.2s ease-in-out infinite;
+   
+}
+
+.puntos span::before{
+  content:""; position:absolute; inset:-2px; border-radius:50%;
+  box-shadow:0 0 5px 1px var(--c);
+  opacity:.35;
+  animation: puntoAura 2.2s ease-in-out infinite;
+  animation-delay: inherit;
+}
+
+.puntos span::after{
+  content:""; position:absolute; top:10%; left:16%;
+  width:36%; height:36%; border-radius:50%;
+  background: radial-gradient(circle, #fff 0%, #ffe9b0 45%, transparent 75%);
+  animation: puntoDestello 2.2s ease-in-out infinite;
+  animation-delay: inherit;
+}
+
+.puntos span:nth-child(1){--c:#E4572E; --cd:#7a2712; animation-delay:0s;}
+.puntos span:nth-child(2){--c:#F3A712; --cd:#8a5905; animation-delay:.2s;}
+.puntos span:nth-child(3){--c:#F3D250; --cd:#8f7614; animation-delay:.4s;}
+
+@keyframes puntoPulso{
+  0%,80%,100%{transform:scale(1);}
+  40%{transform:scale(1.08);}
+}
+@keyframes puntoAura{
+  0%,80%,100%{opacity:.2; transform:scale(1);}
+  40%{opacity:.35; transform:scale(1.08);}
+}
+@keyframes puntoDestello{
+  0%,70%,100%{opacity:.4; transform:scale(.85);}
+  40%{opacity:.9; transform:scale(1.05);}
+}
+.nav-links{display:flex;gap:10px;align-items:center;}
+.nav-links a{
+  color:var(--gris); 
+  text-decoration:none; 
+  font-size:.85rem; 
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  padding:12px 22px;
+  border-radius:999px;
+  transition:all .3s cubic-bezier(0.4, 0, 0.2, 1);
+  position:relative;
+  border:1px solid transparent;
+}
+.nav-links a:hover{
+  color:var(--blanco);
+  background:rgba(228,87,46,0.12);
+  border-color:rgba(228,87,46,0.25);
+  box-shadow:0 4px 20px rgba(228,87,46,0.15);
+}
+.nav-links a.active{
+  color:var(--blanco);
+  background:rgba(228,87,46,0.2);
+  border-color:rgba(228,87,46,0.4);
+}
+
+/* HERO PREMIUM */
+.hero{
+  position:relative; overflow:hidden;
+  min-height:65vh; display:flex; align-items:center; justify-content:center;
+  border-bottom:1px solid var(--gris-linea);
+   background-image: url("/static/img/img%202.jpeg");
+  background-size:cover;
+  background-position:center;
+  padding-bottom:80px;
+}
+.hero::before{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(10,10,10,0.7) 0%, rgba(10,10,10,0.5) 40%, rgba(10,10,10,0.85) 100%);
+  z-index:1;
+}
+.hero-blob{
+  position:absolute; border-radius:50%; filter:blur(80px); opacity:.2; pointer-events:none; z-index:2;
+}
+.blob1{width:600px;height:600px;background:var(--acento);top:-200px;right:-200px;}
+.blob2{width:400px;height:400px;background:rgba(228,87,46,0.5);bottom:-180px;left:-150px;}
+.hero-grid{
+  position:relative; z-index:3; width:100%;
+  display:flex; flex-direction:column; align-items:center; text-align:center;
+  gap:40px;
+}
+.eyebrow{
+  font-size:1.3rem; letter-spacing:.16em; text-transform:uppercase; color:var(--acento);
+  font-weight:800; margin-top:24px; margin-bottom:52px; display:flex; align-items:center; gap:10px; justify-content:center;
+  text-shadow:0 0 20px rgba(228,87,46,.5);
+  position:relative; overflow:hidden;
+}
+.eyebrow::after{
+  content:""; position:absolute; top:0; left:-60%; width:30%; height:100%;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,.9), transparent);
+  transform:skewX(-20deg);
+  animation:eyebrowDestello 3.5s ease-in-out infinite;
+}
+@keyframes eyebrowDestello{
+  0%{left:-60%;}
+  50%{left:130%;}
+  100%{left:130%;}
+}
+.eyebrow::before{content:"";width:40px;height:1px;background:linear-gradient(90deg,transparent,var(--acento));}
+.eyebrow::after{content:"";width:40px;height:1px;background:linear-gradient(90deg,var(--acento),transparent);}
+.hero h1{
+  font-family:'Archivo Black',sans-serif; font-size:clamp(2.8rem,5.5vw,4.5rem);
+  line-height:1.05; text-transform:uppercase; 
+  text-shadow:0 0 60px rgba(228,87,46,.4), 0 4px 20px rgba(0,0,0,.5);
+}
+.hero h1 .color-acento{color:var(--acento);}
+.hero h1 .linea-1{font-size:clamp(1.8rem,4vw,2.8rem); display:block;}
+.hero h1 .linea-2{font-size:clamp(2.3rem,5vw,3.6rem); display:block;}
+.hero h1 .linea-3{font-size:clamp(2.5rem,5.5vw,4rem); display:block; margin-top:18px; margin-bottom:30px; text-shadow:0 0 50px rgba(228,87,46,.6), 0 4px 20px rgba(0,0,0,.5);}
+.hero p.sub{color:#D6D6D6;margin:24px auto 0;max-width:560px;font-size:1.1rem;line-height:1.7;}
+.hero-cta{display:flex;gap:16px;margin-top:40px;flex-wrap:wrap; justify-content:center;}
+.btn-primario{
+  background:#E4572E; color:#fff; font-weight:700; font-size:.85rem;
+  letter-spacing:.03em; text-transform:uppercase; padding:16px 30px; border-radius:999px;
+  border:none; cursor:pointer; box-shadow:0 10px 30px rgba(228,87,46,0.35);
+  transition:transform .2s;
+}
+.btn-primario:hover{transform:translateY(-3px);}
+.btn-secundario{
+  background:transparent; color:#fff; font-weight:600; font-size:.85rem;
+  letter-spacing:.03em; text-transform:uppercase; padding:16px 26px; border-radius:999px;
+  border:1px solid var(--gris-linea); cursor:pointer; transition:border-color .2s,transform .2s;
+}
+.btn-secundario:hover{border-color:#fff;transform:translateY(-3px);}
+.stats-row{display:flex;gap:50px;margin-top:50px;flex-wrap:wrap;justify-content:center;}
+.stat{text-align:center;}
+.stat b{font-family:'Archivo Black',sans-serif;font-size:1.8rem;display:block;color:var(--blanco);}
+.stat span{font-size:.75rem;color:var(--gris);text-transform:uppercase;letter-spacing:.08em;margin-top:6px;display:block;}
+
+.hero-visual{position:relative;margin-top:20px;display:flex;align-items:center;justify-content:center;}
+.qr-frame{
+  position:relative; width:220px; height:220px; border-radius:24px;
+  background:rgba(28,28,28,0.6); border:1px solid rgba(228,87,46,0.3);
+  backdrop-filter:blur(10px);
+  display:flex;align-items:center;justify-content:center; 
+  box-shadow:0 20px 50px rgba(0,0,0,.6), 0 0 30px rgba(228,87,46,0.1);
+}
+.qr-frame svg{width:140px;height:140px;}
+.scan-line{
+  position:absolute; left:14px; right:14px; height:2px; background:var(--acento);
+  box-shadow:0 0 14px 2px var(--acento); animation:scan 2.2s ease-in-out infinite;
+}
+@keyframes scan{0%,100%{top:14px;}50%{top:246px;}}
+.qr-badge{
+  position:absolute; bottom:16px; left:50%; transform:translateX(-50%);
+  background:var(--negro-2); border:1px solid var(--gris-linea); border-radius:999px;
+  padding:6px 14px; font-size:.7rem; color:var(--gris); white-space:nowrap;
+  z-index:10;
+}
+
+/* CATALOGO */
+.seccion{padding:70px 0 40px;}
+.seccion h2{font-family:'Archivo Black',sans-serif;text-transform:uppercase;font-size:1.5rem;margin-bottom:8px;}
+.seccion p.hint{color:var(--gris);font-size:.9rem;margin-bottom:30px;}
+.catalogo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px;}
+.vidrio-card{
+  background:var(--negro-3); border:1px solid var(--gris-linea); border-top:3px solid var(--acento);
+  border-radius:var(--radio); padding:20px; cursor:pointer;
+  transition:transform .2s,border-color .2s,box-shadow .2s;
+}
+.vidrio-card:hover{transform:translateY(-4px);border-color:var(--acento);box-shadow:0 14px 30px rgba(0,0,0,.4);}
+.thumb{width:100%;height:130px;border-radius:8px;margin-bottom:14px;position:relative;overflow:hidden;}
+.thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.18),transparent 60%);}
+.tipo-tag{font-size:.7rem;color:var(--acento);text-transform:uppercase;letter-spacing:.06em;font-weight:700;margin-bottom:6px;}
+.vidrio-card h3{font-family:'Archivo Black',sans-serif;font-size:1.05rem;text-transform:uppercase;margin-bottom:6px;}
+.vidrio-card p{color:var(--gris);font-size:.8rem;line-height:1.5;}
+.ver-mas{margin-top:14px;font-size:.75rem;display:flex;align-items:center;gap:6px;}
+
+/* OVERLAY DE ESCANEO */
+.scan-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;
+  align-items:center;justify-content:center;flex-direction:column;z-index:200;
+}
+.scan-overlay.show{display:flex;}
+.scan-box{width:200px;height:200px;border:2px solid var(--acento);border-radius:20px;position:relative;overflow:hidden;}
+.scan-box .scan-line{left:0;right:0;}
+.scan-text{margin-top:22px;font-size:.85rem;color:var(--gris);letter-spacing:.04em;}
+
+/* FICHA PRODUCTO (overlay) */
+.ficha-overlay{
+  position:fixed;inset:0;background:var(--negro);z-index:150;overflow-y:auto;
+  transform:translateY(100%); transition:transform .35s ease;
+}
+.ficha-overlay.show{transform:translateY(0);}
+.ficha-top{display:flex;align-items:center;gap:14px;padding:18px 24px;border-bottom:1px solid var(--gris-linea);position:sticky;top:0;background:var(--negro);}
+.btn-back{background:none;border:1px solid var(--gris-linea);color:#fff;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:1rem;}
+.ficha-hero{padding:50px 24px 30px;border-bottom:1px solid var(--gris-linea);}
+.ficha-hero .eyebrow{margin-bottom:10px;}
+.ficha-hero h1{font-family:'Archivo Black',sans-serif;font-size:clamp(1.8rem,5vw,2.6rem);text-transform:uppercase;}
+.ficha-tipo{display:inline-block;margin-top:14px;font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--acento);padding:6px 16px;border-radius:999px;}
+.ficha-body{padding:30px 24px 60px;max-width:640px;}
+.ficha-body p{color:#D6D6D6;line-height:1.6;margin-bottom:24px;}
+.specs .fila{display:flex;justify-content:space-between;padding:13px 16px;border:1px solid var(--gris-linea);border-left:3px solid var(--acento);background:var(--negro-2);border-radius:8px;margin-bottom:10px;font-size:.88rem;}
+.specs .fila .k{color:var(--gris);}
+.ficha-cta{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap;}
+
+.quienes{padding-top:70px;border-bottom:1px solid var(--gris-linea);}
+.quienes-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;padding-bottom:60px;}
+.quienes-texto h2{font-family:'Archivo Black',sans-serif;font-size:clamp(2rem,4.5vw,3rem);text-transform:uppercase;line-height:1.08;margin:14px 0 20px;}
+.quienes-texto h2 span{color:var(--acento);}
+.quienes-texto p{color:#D6D6D6;line-height:1.7;font-size:1rem;margin-bottom:26px;max-width:480px;}
+.quienes-video video{width:100%;border-radius:var(--radio);border:1px solid var(--gris-linea);box-shadow:0 30px 60px rgba(0,0,0,.5);background:var(--negro-3);}
+
+.proceso-divider{padding-top:20px;border-top:1px solid var(--gris-linea);}
+.proceso-divider .eyebrow{margin-bottom:26px;}
+
+.mosaico-section{margin-bottom:40px; background:var(--negro-2); border-radius:16px; padding:24px 0; border:1px solid var(--gris-linea);}
+.mosaico-title{
+  font-family:'Archivo Black',sans-serif; font-size:1.2rem;
+  text-transform:uppercase; letter-spacing:.08em;
+  color:var(--blanco); margin-bottom:20px; padding:0 24px;
+  display:flex; align-items:center; gap:12px;
+}
+.mosaico-title::after{
+  content:""; flex:1; height:1px;
+  background:linear-gradient(90deg, var(--gris-linea), transparent);
+}
+.mosaico-grid{
+  display:flex; gap:16px; padding-bottom:30px;
+  overflow-x:auto; scroll-snap-type:x mandatory;
+  scrollbar-width:thin; scrollbar-color:var(--acento) transparent;
+  padding:0 24px 30px;
+}
+.mosaico-grid::-webkit-scrollbar{height:6px;}
+.mosaico-grid::-webkit-scrollbar-track{background:transparent;}
+.mosaico-grid::-webkit-scrollbar-thumb{background:var(--acento); border-radius:3px;}
+.mosaico-item{
+  position:relative; overflow:hidden;
+  border:1px solid var(--gris-linea);
+  background:linear-gradient(135deg,var(--negro-3),#242424);
+  cursor:pointer;
+  transition:all .3s ease;
+  flex:0 0 320px; height:240px;
+  scroll-snap-align:start;
+  border-radius: var(--radio);
+}
+.mosaico-item:hover{
+  transform:translateY(-5px);
+  border-color:rgba(228,87,46,0.4);
+  box-shadow:0 20px 40px rgba(0,0,0,0.4);
+}
+.mosaico-item::before{
+  content:""; position:absolute; inset:-10%;
+  background:inherit; transform:scale(1); transition:transform .5s ease;
+}
+.mosaico-item:hover::before{transform:scale(1.12);}
+.mosaico-item::after{
+  content:attr(data-label);
+  position:absolute; left:0; right:0; bottom:0; padding:14px 16px;
+  font-size:.78rem; color:#fff; font-weight:600; letter-spacing:.02em;
+  background:linear-gradient(180deg,transparent,rgba(0,0,0,.88));
+  transform:translateY(100%); transition:transform .3s ease;
+}
+.mosaico-item:hover::after{transform:translateY(0);}
+.item-big{grid-area:big;}
+.item-s1{grid-area:s1;}
+.item-s2{grid-area:s2;}
+.item-s3{grid-area:s3;}
+@media (max-width:800px){
+  .quienes-grid{grid-template-columns:1fr;}
+  .hero-grid{grid-template-columns:1fr;}
+  .hero h1{font-size:clamp(2rem,8vw,3rem);}
+  .mosaico-item{
+    flex:0 0 200px;
+    height:200px;
+    border-radius:var(--radio);
+  }
+  .mosaico-title{font-size:1rem; padding:0 20px; margin-bottom:14px;}
+  .mosaico-grid{padding:0 20px 20px; gap:12px;}
+  .mosaico-section{margin-bottom:24px; padding:20px 0;}
+}
+.qr-frame:hover .qr-hover{opacity:1;}
+.scanner-modal{
+  display:none; position:fixed; inset:0; z-index:2000;
+  background:rgba(0,0,0,0.95); align-items:center; justify-content:center; flex-direction:column;
+}
+.scanner-modal.show{display:flex;}
+.scanner-box{width:320px; max-width:90vw; border:2px solid var(--acento); border-radius:16px; overflow:hidden; position:relative;}
+.scanner-close{
+  position:absolute; top:20px; right:20px; z-index:2001;
+  background:var(--negro-3); border:1px solid var(--gris-linea); color:#fff;
+  width:40px; height:40px; border-radius:50%; cursor:pointer; font-size:1.2rem;
+  display:flex; align-items:center; justify-content:center;
+}
+.scanner-text{color:var(--gris); margin-top:20px; font-size:.85rem; text-align:center;}
+.nota{
+  margin:50px 24px 30px; padding:16px 18px; border:1px dashed var(--gris-linea);
+  border-radius:var(--radio); font-size:.8rem; color:var(--gris); max-width:1052px; margin-left:auto; margin-right:auto;
+}
+.cta-catalogo-grande{
+  margin:0 24px 40px; padding:56px 30px; text-align:center;
+background-image: linear-gradient(135deg, rgba(20,15,10,0.85), rgba(20,15,10,0.75)), url('https://res.cloudinary.com/sla80nsi/image/upload/v1785771451/8888_iaelbo.jpg');
+  background-size: cover;
+  background-position: center;
+  border:2px solid rgba(228,87,46,0.5); border-radius:16px;
+  position:relative; overflow:hidden;
+  box-shadow:0 0 60px rgba(228,87,46,0.15), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+.cta-catalogo-grande::before{
+  content:""; position:absolute; inset:0;
+  background:radial-gradient(ellipse 70% 100% at 50% 0%, rgba(228,87,46,0.35), transparent);
+  pointer-events:none;
+  animation:ctaPulso 3s ease-in-out infinite;
+}
+@keyframes ctaPulso{
+  0%,100%{opacity:0.7;}
+  50%{opacity:1;}
+}
+.cta-catalogo-contenido{position:relative; z-index:1; max-width:560px; margin:0 auto;}
+.cta-catalogo-grande h3{
+  font-family:'Archivo Black',sans-serif; font-size:clamp(1.6rem,4vw,2.2rem);
+  text-transform:uppercase; margin-bottom:12px; line-height:1.15;
+  text-shadow:0 0 30px rgba(228,87,46,.5);
+}
+.cta-catalogo-grande p{color:var(--blanco); font-size:1.05rem; line-height:1.6; margin-bottom:32px; opacity:.85;}
+.btn-catalogo-grande{
+  display:inline-block; background:#E4572E; color:#fff; font-weight:700;
+  font-size:1rem; letter-spacing:.03em; text-transform:uppercase;
+  padding:20px 44px; border-radius:999px; text-decoration:none;
+  box-shadow:0 12px 40px rgba(228,87,46,0.5);
+  transition:transform .2s, box-shadow .2s;
+  animation:ctaBoton 2s ease-in-out infinite;
+}
+@keyframes ctaBoton{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.03);}
+}
+.btn-catalogo-grande:hover{transform:translateY(-3px) scale(1.03); box-shadow:0 16px 46px rgba(228,87,46,0.6); animation:none;}
+
+/* FOOTER PROFESIONAL */
+.footer-vidplex{
+  background:linear-gradient(180deg, rgba(8,8,8,0.98) 0%, rgba(5,5,5,1) 100%);
+  border-top:1px solid rgba(228,87,46,0.15);
+  padding:60px 50px 30px;
+  position:relative;
+  overflow:hidden;
+}
+.footer-vidplex::before{
+  content:""; position:absolute; top:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg, transparent, rgba(228,87,46,0.4), transparent);
+}
+.footer-grid{
+  display:grid; grid-template-columns:1.5fr 1fr 1.5fr 1fr; gap:40px;
+  max-width:1200px; margin:0 auto;
+}
+.footer-col h4{
+  font-family:'Archivo Black',sans-serif; font-size:.9rem;
+  text-transform:uppercase; letter-spacing:.08em;
+  color:var(--blanco); margin-bottom:20px;
+  position:relative; padding-bottom:10px;
+}
+.footer-col h4::after{
+  content:""; position:absolute; bottom:0; left:0; width:30px; height:2px;
+  background:var(--acento); border-radius:2px;
+}
+.footer-col p, .footer-col a{
+  color:var(--gris); font-size:.82rem; line-height:1.8;
+  text-decoration:none; display:block;
+  transition:all .25s ease;
+}
+.footer-col a:hover{
+  color:var(--acento); padding-left:4px;
+}
+.footer-desc{
+  color:var(--gris); font-size:.85rem; line-height:1.7;
+  margin:16px 0 20px; max-width:280px;
+}
+.footer-social{
+  display:flex; gap:12px;
+}
+.footer-social a{
+  width:40px; height:40px; border-radius:50%;
+  background:rgba(255,255,255,0.05);
+  border:1px solid var(--gris-linea);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--gris);
+  transition:all .3s ease;
+}
+.footer-social a:hover{
+  background:rgba(228,87,46,0.15);
+  border-color:rgba(228,87,46,0.4);
+  color:var(--acento);
+  transform:translateY(-3px);
+  box-shadow:0 6px 20px rgba(228,87,46,0.2);
+}
+.footer-bottom{
+  text-align:center; margin-top:50px; padding-top:25px;
+  border-top:1px solid rgba(255,255,255,0.06);
+  color:var(--gris); font-size:.78rem;
+}
+.footer-marca{display:flex; align-items:center; gap:10px; position:relative;}
+
+@media (max-width:900px){
+  .footer-grid{grid-template-columns:1fr 1fr; gap:30px;}
+  .nav-main{flex-wrap:wrap; justify-content:center; gap:16px 20px; padding:20px 24px;}
+ .nav-links{order:3; width:100%; justify-content:center; align-items:center; margin-top:6px; gap:10px 16px; flex-wrap:wrap;}
+  .nav-actions{order:2;}
+  .nav-info{gap:15px; flex-wrap:wrap; padding:10px 24px; justify-content:center; text-align:center;}
+}
+@media (max-width:600px){
+  body{padding-top:225px;}
+  .footer-grid{grid-template-columns:1fr;}
+  .nav-links{gap:6px; flex-wrap:wrap;}
+  .nav-links a{padding:8px 14px; font-size:.75rem;}
+  .btn-wa, .btn-cotizar{padding:10px 16px; font-size:.75rem;}
+  .marca-texto{font-size:1.6rem;}
+  .hero .eyebrow{font-size:.85rem; padding:0 10px; margin-top:8px; margin-bottom:20px;}
+  .quienes-texto .eyebrow{font-size:1rem; padding:0 10px; margin-bottom:16px;}
+  .footer-vidplex{padding:36px 24px 24px;}
+  .footer-grid{gap:26px;}
+  .footer-col{text-align:center;}
+  .footer-col h4{display:inline-block; margin-bottom:12px;}
+  .footer-col h4::after{left:50%; transform:translateX(-50%);}
+  .footer-marca{justify-content:center;}
+  .footer-desc{margin:12px auto 16px; font-size:.8rem;}
+  .footer-social{justify-content:center; margin-bottom:4px;}
+  .footer-col p, .footer-col a{font-size:.8rem; line-height:1.6;}
+  .footer-bottom{margin-top:26px; padding-top:18px;}
+  .quienes{padding-top:36px;}
+  .quienes-grid{gap:26px; padding-bottom:36px;}
+  .seccion{padding:36px 0 24px;}
+  .hero{padding-bottom:40px;}
+  .hero-grid{gap:20px;}
+  .stats-row{margin-top:28px; gap:28px;}
+  .hero-cta{margin-top:20px;}
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="nav-main">
+                 <a href="/" class="marca">
+     <span class="marca-texto"><span class="letra">V</span><span class="letra">I</span><span class="letra">D</span><span class="letra">P</span><span class="letra">L</span><span class="letra">E</span><span class="letra">X</span></span>
+      <span class="chispita"></span>
+      <span class="puntos"><span></span><span></span><span></span></span>
+    </a>
+    <div class="nav-links">
+      <a href="/catalogo">Catálogo</a>
+      <a href="https://vidplex.com/nosotros/" target="_blank">Nosotros</a>
+      <a href="https://vidplex.com/productos/" target="_blank">Productos</a>
+      <a href="https://vidplex.com/proyectos/" target="_blank">Proyectos</a>
+    </div>
+       <div class="nav-actions">
+      <a href="/catalogo" class="btn-cotizar">Cotizar ahora</a>
+    </div>
+  </div>
+  <div class="nav-info">
+    <span>Bogotá, Colombia</span>
+    <span>PBX +57 1 368 50 48</span>
+    <span>Hola@vidplex.com</span>
+   <span>+35 años de experiencia</span>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-blob blob1"></div>
+  <div class="hero-blob blob2"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Feria Expocamacol 26 "Medellin" </div>
+      <h1><span class="linea-1">Cada vidrio</span><span class="linea-2">tiene <span class="color-acento">su historia</span>.</span><span class="linea-3">Escanéala.</span></h1>
+      <p class="sub">Acerca tu cámara al código QR junto a cualquier pieza del stand y descubre su ficha técnica completa al instante.</p>
+  <div class="hero-cta">
+    <button class="btn-primario" onclick="window.location.href='/catalogo'">Explora la colección de la feria</button>
+      </div>
+      <div class="stats-row">
+        <div class="stat"><b>120+</b><span>Vidrios en catálogo</span></div>
+        <div class="stat"><b>18</b><span>Tipos de acabado</span></div>
+        <div class="stat"><b>&lt;3s</b><span>Carga de ficha</span></div>
+      </div>
+    </div>
+       <div class="hero-visual">
+      <div class="qr-frame" id="qrScannerBtn" style="cursor:pointer; position:relative;">
+        <div class="scan-line"></div>
+        <svg viewBox="0 0 100 100" fill="none" stroke="#E4572E" stroke-width="2">
+          <rect x="8" y="8" width="28" height="28" rx="3"/><rect x="64" y="8" width="28" height="28" rx="3"/>
+          <rect x="8" y="64" width="28" height="28" rx="3"/>
+          <rect x="46" y="8" width="8" height="8"/><rect x="46" y="46" width="8" height="8"/>
+          <rect x="64" y="46" width="8" height="8"/><rect x="80" y="46" width="8" height="8"/>
+          <rect x="64" y="64" width="8" height="8"/><rect x="80" y="80" width="8" height="8"/>
+          <rect x="46" y="80" width="8" height="8"/><rect x="64" y="80" width="8" height="8"/>
+        </svg>
+        <div class="qr-badge">Cada vidrio tiene el suyo</div>
+        <div style="position:absolute; inset:0; background:rgba(228,87,46,0.1); border-radius:24px; display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity .3s;" class="qr-hover">
+          <span style="color:#fff; font-size:.8rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em;">📷 Escanear</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quienes wrap" id="quienes">
+  <div class="quienes-grid">
+    <div class="quienes-texto">
+      <div class="eyebrow">Quiénes somos</div>
+      <h2>Vidrio con<br><span>propósito</span>.</h2>
+     <p>En VidPlex transformamos vidrio en soluciones para arquitectura e interiorismo. Diseño, fabricación e instalación bajo una sola empresa, con control de calidad en cada etapa del proceso.</p>
+    </div>
+       <div class="quienes-video">
+      <div style="position:relative; width:100%; padding-bottom:56.25%; border-radius:8px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,0.5);">
+    <video controls playsinline webkit-playsinline preload="none" poster="/static/img/img%201.jpeg" id="videoInstitucional" style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; object-position:center 20%; border-radius:8px;">
+          <source src="/static/video/vidplex.mp4" type="video/mp4">
+          Tu navegador no soporta el elemento de video.
+        </video>
+      </div>
+    </div>
+  </div>
+
+   <div class="proceso-divider">
+    <div class="eyebrow">El proceso, en imágenes</div>
+  </div>
+
+
+ <div class="mosaico-section">
+    <h3 class="mosaico-title">Proyectos</h3>
+    <div class="mosaico-grid">
+    <div class="mosaico-item" data-label="Proyecto 1"><img src="https://res.cloudinary.com/sla80nsi/image/upload/v1785766985/proyecto1.1_bdgspy.jpg" alt="Proyecto 1" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1;"></div>
+      <div class="mosaico-item" data-label="Proyecto 1"><img src="https://res.cloudinary.com/sla80nsi/image/upload/v1785766985/proyecto2.2_hlg3dp.jpg" alt="Proyecto 1" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1;"></div>
+      <div class="mosaico-item" data-label="Proyecto 2"><img src="https://res.cloudinary.com/sla80nsi/image/upload/v1785766985/proyecto_2_wroh78.jpg" alt="Proyecto 2" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1;"></div>
+      <div class="mosaico-item" data-label="Proyecto 2"><img src="/static/img/proyecto2.2.jpeg" alt="Proyecto 2" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1;"></div>
+      <div class="mosaico-item" data-label="Proyecto 3"><img src="https://res.cloudinary.com/sla80nsi/image/upload/v1785766985/proyecto3.3_buokou.jpg" alt="Proyecto 3" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1;"></div>
+      <div class="mosaico-item" data-label="Proyecto 3"><img src="https://res.cloudinary.com/sla80nsi/image/upload/v1785766985/proyecto3_ovdblt.jpg" alt="Proyecto 3" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1;"></div>
+    </div>
+  </div>
+<div class="cta-catalogo-grande">
+    <div class="cta-catalogo-contenido">
+<h3 style="margin-bottom:6px;">No importa cuál sea tu proyecto:</h3>
+      <p style="font-size:1.5rem; font-weight:800; color:#fff; text-shadow:0 0 25px rgba(228,87,46,.7), 0 2px 10px rgba(0,0,0,.5); letter-spacing:.01em;">el vidrio VidPlex ya lo está esperando.</p>
+    <a href="https://www.flipsnack.com/7EA6E59BDC9/cat-logo-digital-vidplex-en-espan-ol" target="_blank" class="btn-catalogo-grande">Ver Catalogo Digital VidPlex </a>
+  </div>
+</section>
+
+<!-- FOOTER PROFESIONAL -->
+<footer class="footer-vidplex" id="contacto">
+  <div class="footer-grid">
+  <div class="footer-col">
+      <p class="footer-desc">Vidrios de seguridad templados, laminados y DVH. Diseño, fabricación e instalación para arquitectura e interiorismo.</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/vidplex?igsh=MTRjZmswNmVqbWJvdg==" target="_blank" aria-label="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="https://www.facebook.com/share/1GbTr3bCiG/?mibextid=wwXIfr" target="_blank" aria-label="Facebook">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+        </a>
+        <a href="https://co.linkedin.com/company/vidplexcol" target="_blank" aria-label="LinkedIn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Enlaces</h4>
+      <a href="/catalogo">Catálogo</a>
+      <a href="https://vidplex.com/nosotros/" target="_blank">Nosotros</a>
+      <a href="https://vidplex.com/productos/" target="_blank">Productos</a>
+      <a href="https://vidplex.com/proyectos/" target="_blank">Proyectos</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <p><strong>PBX:</strong> +57 1 368 50 48</p>
+      <p><strong>Email:</strong> Hola@vidplex.com</p>
+      <p><strong>Dirección:</strong> Avenida calle 17 # 132-18 Parque industrial urapanes, Bodegas 16-17-24</p>
+      <p><strong>Ciudad:</strong> Bogotá - Colombia</p>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="https://vidplex.com/politica-de-tratamiento-de-datos/" target="_blank">Política de tratamiento de datos</a>
+      <a href="https://vidplex.com/terminos-y-condiciones/" target="_blank">Términos y condiciones</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 VidPlex. Todos los derechos reservados.</p>
+    <p style="font-size:.7rem; color:var(--gris); margin-top:4px;">Vidrios de seguridad con propósito.</p>
+  </div>
+</footer>
+
+<!-- Modal escáner QR -->
+<div class="scanner-modal" id="scannerModal">
+  <button class="scanner-close" onclick="cerrarScanner()">✕</button>
+  <div class="scanner-box" id="reader"></div>
+  <p class="scanner-text">Acerca un código QR de VidPlex a la cámara</p>
+</div>
+
+<script>
+    // Video controles personalizados
+  const video = document.getElementById('videoInstitucional');
+  let lastClickTime = 0;
+  
+  // Doble click para pantalla completa (como YouTube)
+  video.addEventListener('click', function(e) {
+    const currentTime = new Date().getTime();
+    if (currentTime - lastClickTime < 300) {
+      // Doble click = fullscreen
+      if (this.requestFullscreen) {
+        this.requestFullscreen();
+      } else if (this.webkitRequestFullscreen) {
+        this.webkitRequestFullscreen();
+      } else if (this.msRequestFullscreen) {
+        this.msRequestFullscreen();
+      }
+    }
+    lastClickTime = currentTime;
+  });
+
+  // Teclas de acceso rápido (como YouTube)
+  document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    
+    const video = document.getElementById('videoInstitucional');
+    if (!video) return;
+    
+    switch(e.key) {
+      case 'ArrowRight':
+        e.preventDefault();
+        video.currentTime += 10;
+        break;
+      case 'ArrowLeft':
+        e.preventDefault();
+        video.currentTime -= 10;
+        break;
+      case 'f':
+      case 'F':
+        e.preventDefault();
+        if (video.requestFullscreen) {
+          video.requestFullscreen();
+        }
+        break;
+      case ' ':
+        e.preventDefault();
+        if (video.paused) {
+          video.play();
+        } else {
+          video.pause();
+        }
+        break;
+    }
+  });
+
+  // Nav scroll effect
+  window.addEventListener('scroll', function() {
+    const nav = document.querySelector('.topbar');
+    if (window.scrollY > 50) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  });
+
+  // QR Scanner
+  let html5QrCode = null;
+  
+  document.getElementById('qrScannerBtn').addEventListener('click', function() {
+    document.getElementById('scannerModal').classList.add('show');
+    iniciarScanner();
+  });
+
+  function iniciarScanner() {
+    html5QrCode = new Html5Qrcode("reader");
+    html5QrCode.start(
+      { facingMode: "environment" },
+      { fps: 10, qrbox: { width: 250, height: 250 } },
+      function(decodedText) {
+        // Redirigir al producto
+        window.location.href = decodedText;
+        cerrarScanner();
+      },
+      function(errorMessage) {
+        // console.log(errorMessage);
+      }
+    ).catch(function(err) {
+      console.error("Error al iniciar cámara:", err);
+      alert("No se pudo acceder a la cámara. Asegúrate de permitir el acceso.");
+    });
+  }
+
+  function cerrarScanner() {
+    document.getElementById('scannerModal').classList.remove('show');
+    if (html5QrCode) {
+      html5QrCode.stop().then(function() {
+        html5QrCode.clear();
+        html5QrCode = null;
+      }).catch(function(err) {
+        console.error("Error al detener:", err);
+      });
+    }
+  }
+</script>
+<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+</body>
+</html>

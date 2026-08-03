@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block title %}Panel de leads · VidPlex{% endblock %}
+{% block content %}
+<div class="wrap">
+  <div class="topbar admin-dash-topbar">
+    <a href="/" class="marca">
+      <span class="marca-texto"><span class="letra">V</span><span class="letra">I</span><span class="letra">D</span><span class="letra">P</span><span class="letra">L</span><span class="letra">E</span><span class="letra">X</span></span>
+      <span class="chispita"></span>
+      <span class="puntos"><span></span><span></span><span></span></span>
+    </a>
+    <div class="admin-dash-user">
+      <span class="admin-dash-user-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        {{ usuario }}
+      </span>
+      <a href="{{ url_for('main.admin_logout') }}" class="btn" style="padding:8px 14px; font-size:0.72rem;">Salir</a>
+    </div>
+  </div>
+
+  <div style="padding:28px 0 6px; display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:14px;">
+    <div>
+      <div class="eyebrow">Panel en vivo</div>
+      <h1 style="font-family:'Archivo Black', sans-serif; text-transform:uppercase; font-size:1.5rem;">Contactos de la feria</h1>
+    </div>
+   <div style="display:flex; gap:10px;">
+          <a href="{{ url_for('main.admin_export') }}" class="btn btn-solido" style="padding:11px 18px; font-size:0.78rem;">Descargar Excel</a>
+          <button type="button" id="btnReiniciarDatos" class="btn" style="padding:11px 18px; font-size:0.78rem; border-color:#E4572E; color:#E4572E;">Reiniciar datos</button>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:20px;">
+    <h2>Vidrio más visto vs. más cotizado</h2>
+    <p class="hint" id="totalLeadsHint">Cargando…</p>
+    <canvas id="rankingChart" height="140"></canvas>
+  </div>
+
+  <div class="card">
+    <h2>Contactos capturados</h2>
+    <p class="hint">Se actualiza solo cada 30 segundos. También puedes <a href="#" id="btnRefrescar" style="text-decoration:underline;">refrescar ahora</a>.</p>
+    <div style="overflow-x:auto;">
+      <table style="width:100%; border-collapse:collapse; font-size:0.85rem; margin-top:6px;">
+        <thead>
+          <tr style="text-align:left; color:#9A9A9A; text-transform:uppercase; font-size:0.7rem; letter-spacing:0.04em;">
+            <th style="padding:9px 6px; border-bottom:1px solid var(--gris-linea);">Nombre</th>
+            <th style="padding:9px 6px; border-bottom:1px solid var(--gris-linea);">Teléfono</th>
+            <th style="padding:9px 6px; border-bottom:1px solid var(--gris-linea);">Correo</th>
+            <th style="padding:9px 6px; border-bottom:1px solid var(--gris-linea);">Proyecto</th>
+            <th style="padding:9px 6px; border-bottom:1px solid var(--gris-linea);">Vidrios</th>
+            <th style="padding:9px 6px; border-bottom:1px solid var(--gris-linea);">Fecha</th>
+          </tr>
+        </thead>
+        <tbody id="leadsBody">
+          <tr><td colspan="6" style="padding:14px 6px; color:#9A9A9A;">Cargando…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer><div class="marca-mini">VIDPLEX</div><div class="foot-info">panel interno</div></footer>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+<script>
+(function(){
+  var btn = document.getElementById('btnReiniciarDatos');
+  if(!btn) return;
+  btn.addEventListener('click', function(){
+    var primeraConfirmacion = confirm('¿Seguro que quieres borrar TODOS los datos? Esto elimina todos los contactos, sus vínculos con vidrios y el contador de escaneos. Esta acción NO se puede deshacer.');
+    if(!primeraConfirmacion) return;
+
+    var textoEscrito = prompt('Para confirmar, escribe la palabra BORRAR (en mayúsculas):');
+    if(textoEscrito !== 'BORRAR'){
+      alert('Cancelado. No se borró nada.');
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Borrando...';
+
+    fetch('{{ url_for("main.admin_reset_datos") }}', { method: 'POST' })
+      .then(function(r){ return r.json(); })
+      .then(function(res){
+        if(res.ok){
+          alert('Listo, todos los datos fueron eliminados.');
+          window.location.reload();
+        } else {
+          alert('Ocurrió un error al borrar los datos.');
+          btn.disabled = false;
+          btn.textContent = 'Reiniciar datos';
+        }
+      })
+      .catch(function(){
+        alert('Error de conexión al borrar los datos.');
+        btn.disabled = false;
+        btn.textContent = 'Reiniciar datos';
+      });
+  });
+})();
+</script>
+{% endblock %}

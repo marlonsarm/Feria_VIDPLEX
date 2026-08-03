@@ -1,0 +1,6 @@
+.env
+__pycache__/
+*.pyc
+venv/
+qr_generados/*.png
+app/static/video/vidplex-original.mp4
