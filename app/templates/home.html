@@ -951,7 +951,7 @@ background-image: linear-gradient(135deg, rgba(20,15,10,0.85), rgba(20,15,10,0.7
     });
   }
 
-  function cerrarScanner() {
+ function cerrarScanner() {
     document.getElementById('scannerModal').classList.remove('show');
     if (html5QrCode) {
       html5QrCode.stop().then(function() {
@@ -962,6 +962,18 @@ background-image: linear-gradient(135deg, rgba(20,15,10,0.85), rgba(20,15,10,0.7
       });
     }
   }
+
+  // Ajustar el padding superior al alto real del topbar (evita que tape el contenido)
+  (function(){
+    function ajustarPadding(){
+      var topbar = document.querySelector('.topbar');
+      if(!topbar) return;
+      document.body.style.paddingTop = topbar.offsetHeight + 'px';
+    }
+    ajustarPadding();
+    window.addEventListener('resize', ajustarPadding);
+    window.addEventListener('load', ajustarPadding);
+  })();
 </script>
 <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
 </body>
