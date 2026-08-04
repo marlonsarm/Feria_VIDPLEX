@@ -34,7 +34,7 @@ load_dotenv()
 SITE_URL = os.environ.get('SITE_URL', 'http://localhost:5000').rstrip('/')
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT_DIR = os.path.join(BASE_DIR, 'qr_generados')
-LOGO_PATH = os.path.join(BASE_DIR, 'app', 'static', 'img', 'logo.png')
+LOGO_PATH = os.path.join(BASE_DIR, 'app', 'static', 'img', 'logo_DEFINITIVO.png')
 
 # Texto que aparece debajo del QR (puedes cambiarlo aquí)
 TEXTO_QR = "VIDPLEX transformó este vidrio"

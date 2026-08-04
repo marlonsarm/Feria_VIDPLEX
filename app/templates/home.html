@@ -362,7 +362,7 @@ background-image:
 }
 .eyebrow{
   font-size:1.3rem; letter-spacing:.16em; text-transform:uppercase; color:var(--acento);
-  font-weight:800; margin-top:90px; margin-bottom:52px; display:flex; align-items:center; gap:10px; justify-content:center; text-align:center;
+  font-weight:800; margin-top:24px; margin-bottom:52px; display:flex; flex-wrap:wrap; align-items:center; gap:10px; justify-content:center; text-align:center;
   text-shadow:0 0 20px rgba(228,87,46,.5);
   position:relative; overflow:visible;
 }
@@ -685,7 +685,8 @@ background-image: linear-gradient(135deg, rgba(20,15,10,0.85), rgba(20,15,10,0.7
   .nav-links a{padding:8px 14px; font-size:.75rem;}
   .btn-wa, .btn-cotizar{padding:10px 16px; font-size:.75rem;}
   .marca-texto{font-size:1.6rem;}
-  .hero .eyebrow{font-size:.85rem; padding:0 10px; margin-top:8px; margin-bottom:20px;}
+  .hero .eyebrow{font-size:.85rem; padding:0 10px; margin-top:8px; margin-bottom:20px; text-align:center; width:100%;}
+  .hero .eyebrow::before, .hero .eyebrow::after{display:none;}
   .quienes-texto .eyebrow{font-size:1rem; padding:0 10px; margin-bottom:16px;}
   .footer-vidplex{padding:36px 24px 24px;}
   .footer-grid{gap:26px;}
