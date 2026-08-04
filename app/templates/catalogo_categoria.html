@@ -371,10 +371,8 @@ background-image:
 
 <div class="topbar">
   <div class="nav-main">
-    <a href="/" class="marca">
-      <span class="marca-texto"><span class="letra">V</span><span class="letra">I</span><span class="letra">D</span><span class="letra">P</span><span class="letra">L</span><span class="letra">E</span><span class="letra">X</span></span>
-      <span class="chispita"></span>
-      <span class="puntos"><span></span><span></span><span></span></span>
+   <a href="/" class="marca">
+      <img src="https://res.cloudinary.com/sla80nsi/image/upload/v1785859184/vidplex_logo_transparente_uwghoc.png" alt="VidPlex" style="height:44px;width:auto;display:block;">
     </a>
     <div class="nav-links">
       <a href="https://vidplex.com/nosotros/" target="_blank">Nosotros</a>
@@ -391,7 +389,7 @@ background-image:
     <div class="cat-header-inner">
       <a href="/catalogo" class="volver">&#8592; Volver a categorías</a>
       <h1>{{ categoria.nombre }}</h1>
-      <p class="hint">Toca cualquier pieza para ver su ficha técnica.</p>
+   <p class="hint">Toca cualquier pieza para ver especificaiones de el vidrio.</p>
       <span class="cat-count">{{ vidrios|length }} vidrios disponibles</span>
     </div>
   </div>
@@ -412,7 +410,7 @@ background-image:
       <div class="tipo-tag">{{ v.tipo_vidrio }}</div>
       <h3>{{ v.nombre[:38] }}{% if v.nombre|length > 38 %}...{% endif %}</h3>
       <p>{{ (v.descripcion or '')[:110] }}{% if v.descripcion and v.descripcion|length > 110 %}...{% endif %}</p>
-     <div class="ver-mas"><span>Ver ficha técnica</span><span>&#8594;</span></div>
+     <div class="ver-mas"><span>Ver vidrio</span><span>&#8594;</span></div>
       </div>
       </a>
     {% else %}

@@ -5,9 +5,7 @@
 <div class="topbar">
   <div class="nav-main">
     <a href="/" class="marca">
-      <span class="marca-texto"><span class="letra">V</span><span class="letra">I</span><span class="letra">D</span><span class="letra">P</span><span class="letra">L</span><span class="letra">E</span><span class="letra">X</span></span>
-      <span class="chispita"></span>
-      <span class="puntos"><span></span><span></span><span></span></span>
+      <img src="https://res.cloudinary.com/sla80nsi/image/upload/v1785859184/vidplex_logo_transparente_uwghoc.png" alt="VidPlex" style="height:44px;width:auto;display:block;">
     </a>
     <div class="nav-links">
     <a href="/">Inicio</a>
@@ -28,7 +26,7 @@
   <div class="hero-blob blob1"></div>
   <div class="hero-blob blob2"></div>
   <div class="wrap hero-inner">
-    <div class="eyebrow">Ficha técnica · {{ producto.ref_code }}</div>
+    <div class="eyebrow">Vidrio · {{ producto.ref_code }}</div>
     <h1>{{ producto.nombre }}</h1>
     <span class="tipo">{{ producto.tipo_vidrio }}</span>
   </div>
@@ -100,7 +98,7 @@
   </div>
    <div class="card" id="form-lead" style="position:relative; display:none;">
     <div id="formState">
-      <h2>Recibe la ficha completa</h2>
+      <h2>Ver Espicificaiones del Vidrio </h2>
       <p class="hint">Nombre, teléfono y correo — nada más. Te contactamos en menos de 24h.</p>
 
                 <form id="leadForm" novalidate>
@@ -154,7 +152,7 @@
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#3FA34D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </div>
       <h3>Listo, ya tenemos tus datos</h3>
-      <p>Un asesor de VidPlex te escribirá pronto con la ficha técnica y la cotización.</p>
+    <p>Un asesor de VidPlex te escribirá pronto con la información y la cotización.</p>
     </div>
   </div>
 
@@ -162,9 +160,7 @@
     <div class="footer-grid">
       <div class="footer-col">
       <div class="footer-marca">
-          <span class="marca-texto" style="font-size:1.8rem;"><span class="letra">V</span><span class="letra">I</span><span class="letra">D</span><span class="letra">P</span><span class="letra">L</span><span class="letra">E</span><span class="letra">X</span></span>
-          <span class="chispita"></span>
-          <span class="puntos"><span></span><span></span><span></span></span>
+          <img src="https://res.cloudinary.com/sla80nsi/image/upload/v1785859184/vidplex_logo_transparente_uwghoc.png" alt="VidPlex" style="height:34px;width:auto;display:block;">
         </div>
         <p class="footer-desc">Vidrios de seguridad templados, laminados y DVH. Diseño, fabricación e instalación para arquitectura e interiorismo.</p>
         <div class="footer-social">
@@ -211,8 +207,8 @@
   <div class="lead-modal-content">
     
     <!-- IMAGEN LATERAL (espacio para foto real de la empresa) -->
-    <div class="lead-modal-visual" style="display:block !important;visibility:visible !important;opacity:1 !important;position:relative;overflow:hidden;background:linear-gradient(135deg,#2C2720,#1A1714);aspect-ratio:3/4;width:100%;max-width:320px;">
-      <img src="/static/img/img%201.jpeg" alt="VidPlex instalación" style="display:block !important;visibility:visible !important;opacity:1 !important;width:100%;height:100%;object-fit:cover;object-position:center;" onerror="this.onerror=null;this.src='/static/img/img%202.jpeg';">
+    <div class="lead-modal-visual" style="display:block !important;visibility:visible !important;opacity:1 !important;position:relative;overflow:hidden;background:linear-gradient(135deg,#2C2720,#1A1714);aspect-ratio:3/4;width:calc(100% - 32px);max-width:320px;margin:16px auto 0 auto;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,0.4);">
+<img src="/static/img/img%201.jpeg" alt="VidPlex instalación" style="display:block !important;visibility:visible !important;opacity:1 !important;width:100%;height:100%;object-fit:cover;object-position:center 15%;" onerror="this.onerror=null;this.src='/static/img/img%202.jpeg';">
       <div class="lead-visual-overlay">
        <span class="lead-visual-tag">+35 años de experiencia</span>
       </div>
@@ -220,22 +216,20 @@
     
     <!-- CONTENIDO DEL FORMULARIO -->
     <div class="lead-modal-body">
-      <div class="lead-modal-header">
-     <span class="marca-texto" style="font-size:1.3rem;"><span class="letra">V</span><span class="letra">I</span><span class="letra">D</span><span class="letra">P</span><span class="letra">L</span><span class="letra">E</span><span class="letra">X</span></span>
-        <span class="chispita"></span>
-        <span class="puntos" style="gap:4px;"><span style="width:6px;height:6px;"></span><span style="width:6px;height:6px;"></span><span style="width:6px;height:6px;"></span></span>
+     <div class="lead-modal-header">
+     <img src="https://res.cloudinary.com/sla80nsi/image/upload/v1785859184/vidplex_logo_transparente_uwghoc.png" alt="VidPlex" style="height:28px;width:auto;display:block;">
       </div>
       
       <div class="lead-hero-text">
         <h2>No solo es vidrio.<br>Es <span>seguridad garantizada</span>.</h2>
-        <p class="lead-hint">Más de <strong>500 proyectos</strong> en Colombia confían en nosotros. Déjanos tus datos y recibe la ficha técnica de <strong>{{ producto.nombre }}</strong> + asesoría personalizada en menos de 24h.</p>
+<p class="lead-hint">Más de <strong>500 proyectos</strong> en Colombia confían en nosotros. Déjanos tus datos y recibe toda la información de <strong>{{ producto.nombre }}</strong> + asesoría personalizada en menos de 24h.</p>
       </div>
       
       <!-- BENEFICIOS VISUALES -->
       <div class="lead-benefits">
         <div class="lead-benefit">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E4572E" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          <span>Ficha técnica completa</span>
+          <span>Información completa</span>
         </div>
         <div class="lead-benefit">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E4572E" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
@@ -276,7 +270,7 @@
         </div>
         
         <button type="submit" class="lead-submit" id="modalSubmitBtn">
-          <span>Quiero mi ficha técnica</span>
+          <span>Ver Especificaciones del vidrio </span>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
         
@@ -288,8 +282,8 @@
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#3FA34D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <h3>¡Perfecto, <span id="successNombre">Davis</span>!</h3>
-        <p class="lead-success-msg">Tu ficha técnica de <strong>{{ producto.nombre }}</strong> está en camino. Un asesor te contactará en menos de 24h.</p>
-        <button type="button" class="lead-close-btn" onclick="cerrarLeadModal()">Ver ficha técnica</button>
+<p class="lead-success-msg">La información de <strong>{{ producto.nombre }}</strong> está en camino. Un asesor te contactará en menos de 24h.</p>
+<button type="button" class="lead-close-btn" onclick="cerrarLeadModal()">Ver vidrio</button>
       </div>
     </div>
   </div>
