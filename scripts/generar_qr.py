@@ -46,7 +46,7 @@ TEXTO_QR = "VIDPLEX transformó este vidrio"
 FONDO_TRANSPARENTE = False
 
 COLOR_QR = "#110F0D"        # negro casi puro (igual al de la placa del logo, para que se vea integrado)
-COLOR_FONDO = "#A59D9D"     # gris clarito (se usa cuando FONDO_TRANSPARENTE = False)
+COLOR_FONDO = "#FFFFFF"     # gris clarito (se usa cuando FONDO_TRANSPARENTE = False)
 COLOR_TEXTO = "#110F0D"     # color del texto de abajo
 MARGEN_MARCO = 16           # grosor del marco alrededor del QR
 ALTO_FRANJA_TEXTO = 84      # alto de la franja donde va el texto (más grande = letra más grande)
@@ -111,7 +111,7 @@ def _fondo_tarjeta(w, h, radius, borde_ancho=2):
     una sola pieza continua), con un borde negro muy delgado alrededor."""
     W, H, R = w * SUPERSAMPLE, h * SUPERSAMPLE, radius * SUPERSAMPLE
     grad = Image.new("RGB", (1, H))
-    top, bot = (232, 235, 239), (162, 170, 178)
+    top, bot = (255, 255, 255), (255, 255, 255)
     for y in range(H):
         t = y / max(H - 1, 1)
         r = int(top[0] * (1 - t) + bot[0] * t)
