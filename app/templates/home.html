@@ -292,17 +292,16 @@ background-image:
   40%{opacity:.9; transform:scale(1.05);}
 }
 .nav-links{
-  display:flex; flex-direction:column; gap:4px; align-items:stretch;
-  position:absolute; top:calc(100% + 12px); right:0;
+  display:flex; flex-direction:column; gap:6px; align-items:stretch;
+  position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
   background:var(--negro-2); border:1px solid var(--gris-linea);
-  border-radius:14px; padding:10px; min-width:210px;
-  box-shadow:0 20px 50px rgba(0,0,0,.55);
-  opacity:0; visibility:hidden; transform:translateY(-8px);
-  transition:opacity .25s ease, transform .25s ease, visibility .25s;
-  z-index:1001;
+  border-radius:14px; padding:14px; min-width:230px;
+  box-shadow:0 20px 60px rgba(0,0,0,.7);
+  opacity:0; visibility:hidden;
+  z-index:9999;
 }
 .nav-links.open{
-  opacity:1; visibility:visible; transform:translateY(0);
+  opacity:1; visibility:visible;
 }
 .nav-links a{
   color:var(--gris); 
@@ -796,7 +795,7 @@ background-image: linear-gradient(135deg, rgba(20,15,10,0.85), rgba(20,15,10,0.7
      <p>En VidPlex transformamos vidrio en soluciones para arquitectura e interiorismo. Diseño, fabricación e instalación bajo una sola empresa, con control de calidad en cada etapa del proceso.</p>
     </div>
        <div class="quienes-video">
-      <div style="position:relative; width:100%; padding-bottom:56.25%; border-radius:8px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,0.5);">
+     <div style="position:relative; width:100%; padding-bottom:56.25%; border-radius:8px; overflow:hidden; border:1px solid rgba(228,87,46,0.3); box-shadow:0 20px 50px rgba(0,0,0,.6), 0 0 30px rgba(228,87,46,0.1);">
     <video controls playsinline webkit-playsinline preload="none" poster="/static/img/img%201.jpeg" id="videoInstitucional" style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; object-position:center 20%; border-radius:8px;">
           <source src="/static/video/vidplex.mp4" type="video/mp4">
           Tu navegador no soporta el elemento de video.
