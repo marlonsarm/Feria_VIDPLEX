@@ -17,7 +17,7 @@
   --radio:10px;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-html{overflow-x:hidden;width:100%;touch-action:manipulation;}
+html{overflow-x:hidden;width:100%;touch-action:manipulation;overscroll-behavior-y:none;height:100%;}
 .nav-main{
   display:flex; align-items:center; justify-content:space-between;
   padding:24px 50px;
@@ -29,6 +29,7 @@ html{overflow-x:hidden;width:100%;touch-action:manipulation;}
 body{
   background:var(--negro); color:var(--blanco); font-family:'Inter',sans-serif;
   padding-top:140px; overflow-x:hidden;
+  overscroll-behavior-y:none;
   background-image:
     radial-gradient(circle at 15% 0%, rgba(228,87,46,0.18), transparent 45%),
     radial-gradient(circle at 100% 30%, rgba(255,255,255,0.07), transparent 40%),
@@ -60,6 +61,9 @@ html::after{
   backdrop-filter:blur(32px) saturate(220%);
   -webkit-backdrop-filter:blur(32px) saturate(220%);
   transition:all .4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform:translateZ(0);
+  -webkit-transform:translateZ(0);
+  will-change:transform;
 }
 .topbar::before{
   content:""; position:absolute; inset:0; z-index:-1;
@@ -339,12 +343,14 @@ background-image:
   background:rgba(228,87,46,0.2);
   border-color:rgba(228,87,46,0.4);
 }
-.nav-menu-wrap{position:relative; display:flex; align-items:center;}
+.nav-menu-wrap{position:relative; display:flex; align-items:center; justify-content:center; width:100%;}
 .btn-hamburger{
-  width:42px; height:42px; border-radius:50%;
+  width:40px; height:40px; min-width:40px; min-height:40px; max-width:40px; max-height:40px;
+  border-radius:50%; padding:0; margin:0; appearance:none; -webkit-appearance:none;
   background:rgba(255,255,255,0.05); border:1px solid var(--gris-linea);
   display:flex; flex-direction:column; align-items:center; justify-content:center;
   gap:4px; cursor:pointer; transition:all .3s ease; flex-shrink:0;
+  font:inherit;
 }
 .btn-hamburger:hover{
   border-color:rgba(228,87,46,0.4);
@@ -713,8 +719,8 @@ background-image: linear-gradient(135deg, rgba(20,15,10,0.85), rgba(20,15,10,0.7
   .nav-main{flex-direction:column; align-items:center; justify-content:flex-start; gap:10px; padding:14px 18px;}
   .nav-top-row{width:100%; justify-content:space-between;}
   .btn-wa, .btn-cotizar{padding:8px 12px; font-size:.68rem; white-space:nowrap;}
-  .btn-hamburger{width:34px; height:34px;}
-  .marca img{height:32px !important;}
+  .btn-hamburger{width:34px; height:34px; min-width:34px; min-height:34px; max-width:34px; max-height:34px;}
+  .marca img{height:42px !important;}
   .marca-texto{font-size:1.6rem;}
   .hero .eyebrow{font-size:.85rem; padding:0 10px; margin-top:38px; margin-bottom:20px; text-align:center; width:100%;}
   .hero .eyebrow::before, .hero .eyebrow::after{display:none;}
@@ -743,8 +749,8 @@ background-image: linear-gradient(135deg, rgba(20,15,10,0.85), rgba(20,15,10,0.7
 <div class="topbar">
   <div class="nav-main">
     <div class="nav-top-row">
-      <a href="/" class="marca">
-        <img src="https://res.cloudinary.com/sla80nsi/image/upload/v1785859184/vidplex_logo_transparente_uwghoc.png" alt="VidPlex" style="height:44px;width:auto;display:block;">
+     <a href="/" class="marca">
+        <img src="https://res.cloudinary.com/sla80nsi/image/upload/v1785859184/vidplex_logo_transparente_uwghoc.png" alt="VidPlex" style="height:58px;width:auto;display:block;">
       </a>
       <a href="/catalogo" class="btn-cotizar">Contáctanos</a>
     </div>
