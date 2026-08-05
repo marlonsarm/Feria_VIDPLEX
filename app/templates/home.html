@@ -309,7 +309,19 @@ background-image:
   0%,70%,100%{opacity:.4; transform:scale(.85);}
   40%{opacity:.9; transform:scale(1.05);}
 }
-.nav-links{display:flex;gap:10px;align-items:center;}
+.nav-links{
+  display:flex; flex-direction:column; gap:4px; align-items:stretch;
+  position:absolute; top:calc(100% + 12px); right:0;
+  background:var(--negro-2); border:1px solid var(--gris-linea);
+  border-radius:14px; padding:10px; min-width:210px;
+  box-shadow:0 20px 50px rgba(0,0,0,.55);
+  opacity:0; visibility:hidden; transform:translateY(-8px);
+  transition:opacity .25s ease, transform .25s ease, visibility .25s;
+  z-index:1001;
+}
+.nav-links.open{
+  opacity:1; visibility:visible; transform:translateY(0);
+}
 .nav-links a{
   color:var(--gris); 
   text-decoration:none; 
@@ -317,11 +329,12 @@ background-image:
   font-weight:600;
   letter-spacing:.08em;
   text-transform:uppercase;
-  padding:12px 22px;
-  border-radius:999px;
+  padding:12px 18px;
+  border-radius:10px;
   transition:all .3s cubic-bezier(0.4, 0, 0.2, 1);
   position:relative;
   border:1px solid transparent;
+  text-align:left;
 }
 .nav-links a:hover{
   color:var(--blanco);
@@ -334,6 +347,24 @@ background-image:
   background:rgba(228,87,46,0.2);
   border-color:rgba(228,87,46,0.4);
 }
+.nav-menu-wrap{position:relative;}
+.btn-hamburger{
+  width:42px; height:42px; border-radius:50%;
+  background:rgba(255,255,255,0.05); border:1px solid var(--gris-linea);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:4px; cursor:pointer; transition:all .3s ease; flex-shrink:0;
+}
+.btn-hamburger:hover{
+  border-color:rgba(228,87,46,0.4);
+  background:rgba(228,87,46,0.12);
+}
+.btn-hamburger span{
+  display:block; width:18px; height:2px; border-radius:2px;
+  background:var(--blanco); transition:all .3s ease;
+}
+.btn-hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+.btn-hamburger.open span:nth-child(2){opacity:0;}
+.btn-hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
 
 /* HERO PREMIUM */
 .hero{
@@ -477,6 +508,7 @@ background-image:
 
 .quienes{padding-top:70px;border-bottom:1px solid var(--gris-linea);}
 .quienes-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;padding-bottom:60px;}
+.eyebrow-centro{width:100%;justify-content:center;text-align:center;}
 .quienes-texto h2{font-family:'Archivo Black',sans-serif;font-size:clamp(2rem,4.5vw,3rem);text-transform:uppercase;line-height:1.08;margin:14px 0 20px;}
 .quienes-texto h2 span{color:var(--acento);}
 .quienes-texto p{color:#D6D6D6;line-height:1.7;font-size:1rem;margin-bottom:26px;max-width:480px;}
@@ -673,16 +705,14 @@ background-image: linear-gradient(135deg, rgba(20,15,10,0.85), rgba(20,15,10,0.7
 
 @media (max-width:900px){
   .footer-grid{grid-template-columns:1fr 1fr; gap:30px;}
-  .nav-main{flex-wrap:wrap; justify-content:center; gap:16px 20px; padding:20px 24px;}
- .nav-links{order:3; width:100%; justify-content:center; align-items:center; margin-top:6px; gap:10px 16px; flex-wrap:wrap;}
-  .nav-actions{order:2;}
+  .nav-main{padding:20px 24px;}
   .nav-info{gap:15px; flex-wrap:wrap; padding:10px 24px; justify-content:center; text-align:center;}
 }
 @media (max-width:600px){
   body{padding-top:225px;}
   .footer-grid{grid-template-columns:1fr;}
-  .nav-links{gap:6px; flex-wrap:wrap;}
-  .nav-links a{padding:8px 14px; font-size:.75rem;}
+  .nav-links{right:auto; left:0; min-width:180px;}
+  .nav-links a{padding:10px 14px; font-size:.75rem;}
   .btn-wa, .btn-cotizar{padding:10px 16px; font-size:.75rem;}
   .marca-texto{font-size:1.6rem;}
   .hero .eyebrow{font-size:.85rem; padding:0 10px; margin-top:38px; margin-bottom:20px; text-align:center; width:100%;}
@@ -714,14 +744,19 @@ background-image: linear-gradient(135deg, rgba(20,15,10,0.85), rgba(20,15,10,0.7
                <a href="/" class="marca">
       <img src="https://res.cloudinary.com/sla80nsi/image/upload/v1785859184/vidplex_logo_transparente_uwghoc.png" alt="VidPlex" style="height:44px;width:auto;display:block;">
     </a>
-    <div class="nav-links">
-      <a href="/catalogo">Catálogo</a>
-      <a href="https://vidplex.com/nosotros/" target="_blank">Nosotros</a>
-      <a href="https://vidplex.com/productos/" target="_blank">Productos</a>
-      <a href="https://vidplex.com/proyectos/" target="_blank">Proyectos</a>
-    </div>
        <div class="nav-actions">
      <a href="/catalogo" class="btn-cotizar">Contacta un asesor</a>
+      <div class="nav-menu-wrap">
+        <button class="btn-hamburger" id="btnHamburger" aria-label="Abrir menú" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links" id="navLinks">
+          <a href="/catalogo">Catálogo</a>
+          <a href="https://vidplex.com/nosotros/" target="_blank">Nosotros</a>
+          <a href="https://vidplex.com/productos/" target="_blank">Productos</a>
+          <a href="https://vidplex.com/proyectos/" target="_blank">Proyectos</a>
+        </div>
+      </div>
     </div>
   </div>
   <div class="nav-info">
@@ -772,7 +807,7 @@ background-image: linear-gradient(135deg, rgba(20,15,10,0.85), rgba(20,15,10,0.7
 <section class="quienes wrap" id="quienes">
   <div class="quienes-grid">
     <div class="quienes-texto">
-      <div class="eyebrow">Quiénes somos</div>
+      <div class="eyebrow eyebrow-centro">Quiénes somos</div>
       <h2>Vidrio con<br><span>propósito</span>.</h2>
      <p>En VidPlex transformamos vidrio en soluciones para arquitectura e interiorismo. Diseño, fabricación e instalación bajo una sola empresa, con control de calidad en cada etapa del proceso.</p>
     </div>
@@ -914,6 +949,36 @@ background-image: linear-gradient(135deg, rgba(20,15,10,0.85), rgba(20,15,10,0.7
         break;
     }
   });
+
+  // Menú hamburguesa
+  (function(){
+    const btn = document.getElementById('btnHamburger');
+    const menu = document.getElementById('navLinks');
+    if (!btn || !menu) return;
+
+    function cerrarMenu(){
+      menu.classList.remove('open');
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      const abierto = menu.classList.toggle('open');
+      btn.classList.toggle('open', abierto);
+      btn.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+    });
+
+    document.addEventListener('click', function(e){
+      if (!menu.contains(e.target) && !btn.contains(e.target)) {
+        cerrarMenu();
+      }
+    });
+
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') cerrarMenu();
+    });
+  })();
 
   // Nav scroll effect
   window.addEventListener('scroll', function() {
