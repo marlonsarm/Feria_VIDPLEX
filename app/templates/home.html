@@ -69,7 +69,7 @@ body::before{
   pointer-events:none;
 }
 .nav-main{
-  display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
+  display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-start;
   gap:12px;
   padding:20px 50px 16px;
   max-width:1300px; margin:0 auto; width:100%;
@@ -80,8 +80,9 @@ body::before{
   border-radius:0 0 20px 21px;
 }
 .nav-top-row{
-  display:flex; align-items:center; justify-content:space-between;
-  width:100%;
+  display:flex; align-items:center; justify-content:flex-start;
+  gap:20px;
+  width:auto;
 }
 /* Destello que solo brilla en las letras - llega hasta PROYECTOS */
 .nav-main::before{
@@ -338,7 +339,7 @@ background-image:
   background:rgba(228,87,46,0.2);
   border-color:rgba(228,87,46,0.4);
 }
-.nav-menu-wrap{position:relative; display:flex; align-items:center; justify-content:center;}
+.nav-menu-wrap{position:relative; display:flex; align-items:center; justify-content:flex-start;}
 .btn-hamburger{
   width:40px; height:40px; min-width:40px; min-height:40px; max-width:40px; max-height:40px;
   border-radius:50%; padding:0; margin:0; appearance:none; -webkit-appearance:none;
