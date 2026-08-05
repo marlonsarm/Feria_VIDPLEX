@@ -293,10 +293,10 @@ background-image:
 }
 .nav-links{
   display:flex; flex-direction:column; gap:6px; align-items:stretch;
-  position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+  position:absolute; top:calc(100% + 10px); right:0;
   background:var(--negro-2); border:1px solid var(--gris-linea);
-  border-radius:14px; padding:14px; min-width:230px;
-  box-shadow:0 20px 60px rgba(0,0,0,.7);
+  border-radius:14px; padding:12px; min-width:200px;
+  box-shadow:0 20px 50px rgba(0,0,0,.6);
   opacity:0; visibility:hidden;
   z-index:9999;
 }
@@ -691,17 +691,19 @@ background-image: linear-gradient(135deg, rgba(20,15,10,0.85), rgba(20,15,10,0.7
   .nav-info{gap:15px; flex-wrap:wrap; padding:10px 24px; justify-content:center; text-align:center;}
 }
 @media (max-width:600px){
-  body{padding-top:225px;}
+  body{padding-top:90px;}
   .footer-grid{grid-template-columns:1fr;}
   .nav-links{
-    right:0; left:auto; min-width:0; width:260px;
-    flex-direction:row; flex-wrap:wrap; justify-content:center; gap:8px;
+    right:0; left:auto; min-width:0; width:230px;
+    flex-direction:row; flex-wrap:wrap; justify-content:center; gap:6px;
+    top:calc(100% + 8px);
   }
-  .nav-links a{padding:10px 14px; font-size:.75rem;}
-  .nav-main{flex-direction:column; align-items:center; gap:12px;}
-  .nav-actions{flex-direction:column; align-items:center; gap:10px;}
-  .btn-wa, .btn-cotizar{padding:10px 16px; font-size:.75rem; white-space:nowrap;}
-  .btn-hamburger{width:36px; height:36px;}
+  .nav-links a{padding:8px 12px; font-size:.7rem;}
+  .nav-main{flex-direction:row; align-items:center; justify-content:space-between; gap:8px; padding:14px 18px;}
+  .nav-actions{flex-direction:row; align-items:center; gap:8px;}
+  .btn-wa, .btn-cotizar{padding:8px 12px; font-size:.68rem; white-space:nowrap;}
+  .btn-hamburger{width:34px; height:34px;}
+  .marca img{height:32px !important;}
   .marca-texto{font-size:1.6rem;}
   .hero .eyebrow{font-size:.85rem; padding:0 10px; margin-top:38px; margin-bottom:20px; text-align:center; width:100%;}
   .hero .eyebrow::before, .hero .eyebrow::after{display:none;}
