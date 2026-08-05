@@ -24,7 +24,7 @@ html{overflow-x:hidden;width:100%;touch-action:manipulation;}
   max-width:1300px; margin:0 auto; width:100%;
   min-width:0;
   position:relative;
-  overflow:hidden;
+  overflow-x:hidden; overflow-y:visible;
 }
 body{
   background:var(--negro); color:var(--blanco); font-family:'Inter',sans-serif;
@@ -35,6 +35,8 @@ body{
     radial-gradient(circle at 50% 100%, rgba(228,87,46,0.10), transparent 55%);
   background-size:auto;
   background-position:0 0;
+  border:1px solid rgba(255,255,255,0.12);
+  min-height:100vh;
 }
 
 body::before{
@@ -68,7 +70,7 @@ body::before{
   max-width:1300px; margin:0 auto; width:100%;
   min-width:0;
   position:relative;
-  overflow:hidden;
+  overflow-x:hidden; overflow-y:visible;
   background:linear-gradient(180deg, rgba(228,87,46,0.10) 0%, rgba(228,87,46,0.03) 60%, transparent 100%);
   border-radius:0 0 20px 20px;
 }
@@ -123,7 +125,7 @@ body::before{
   background:#E4572E;
   color:#fff; font-size:.8rem; font-weight:700;
   padding:12px 24px; border-radius:999px; text-decoration:none;
-  border:1px solid rgba(255,255,255,0.1);
+  border:1.5px solid rgba(255,255,255,0.4);
   box-shadow:0 4px 15px var(--acento-suave);
   transition:all .3s cubic-bezier(0.4, 0, 0.2, 1);
   position:relative; overflow:hidden;
@@ -484,7 +486,7 @@ background-image:
 
 .quienes{padding-top:70px;border-bottom:1px solid var(--gris-linea);}
 .quienes-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;padding-bottom:60px;}
-.eyebrow-centro{width:100%;justify-content:center;text-align:center;}
+.eyebrow-centro{width:100% !important;display:flex !important;justify-content:center !important;text-align:center !important;}
 .quienes-texto h2{font-family:'Archivo Black',sans-serif;font-size:clamp(2rem,4.5vw,3rem);text-transform:uppercase;line-height:1.08;margin:14px 0 20px;}
 .quienes-texto h2 span{color:var(--acento);}
 .quienes-texto p{color:#D6D6D6;line-height:1.7;font-size:1rem;margin-bottom:26px;max-width:480px;}
