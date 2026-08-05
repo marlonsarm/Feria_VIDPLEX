@@ -45,8 +45,10 @@ body::before{
   pointer-events:none;
 }
 html::after{
-  content:""; position:fixed; inset:0; z-index:5000;
-  border:2px solid rgba(255,255,255,0.35);
+  content:""; position:fixed; top:0; left:0;
+  width:100vw; height:100dvh; z-index:5000;
+  outline:2px solid rgba(255,255,255,0.35);
+  outline-offset:-2px;
   pointer-events:none;
 }
 
