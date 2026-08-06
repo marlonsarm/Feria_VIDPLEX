@@ -67,11 +67,10 @@ body::before{
     radial-gradient(ellipse 80% 50% at 50% -20%, rgba(228,87,46,0.15), transparent),
     radial-gradient(ellipse 60% 40% at 80% 100%, rgba(228,87,46,0.08), transparent);
   pointer-events:none;
-}
-.nav-main{
-  display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-start;
-  gap:12px;
-  padding:20px 50px 16px;
+}.nav-main{
+  display:flex; flex-direction:row; align-items:center; justify-content:space-between;
+  gap:20px;
+  padding:18px 50px;
   max-width:1300px; margin:0 auto; width:100%;
   min-width:0;
   position:relative;
@@ -79,10 +78,12 @@ body::before{
   background:linear-gradient(180deg, rgba(228,87,46,0.10) 0%, rgba(228,87,46,0.03) 60%, transparent 100%);
   border-radius:0 0 20px 21px;
 }
-.nav-top-row{
-  display:flex; align-items:center; justify-content:flex-start;
-  gap:20px;
-  width:auto;
+.nav-actions-group{
+  display:flex; align-items:center; gap:16px;
+}
+.nav-divider{
+  width:1px; height:30px;
+  background:linear-gradient(180deg, transparent, var(--gris-linea), transparent);
 }
 /* Destello que solo brilla en las letras - llega hasta PROYECTOS */
 .nav-main::before{
@@ -352,7 +353,7 @@ background-image:
   background:rgba(228,87,46,0.2);
   border-color:rgba(228,87,46,0.4);
 }
-.nav-menu-wrap{position:relative; display:flex; align-items:center; justify-content:center; width:100%;}
+.nav-menu-wrap{position:relative; display:flex; align-items:center; justify-content:flex-end;}
 .btn-hamburger{
   width:40px; height:40px; min-width:40px; min-height:40px; max-width:40px; max-height:40px;
   border-radius:50%; padding:0; margin:0; appearance:none; -webkit-appearance:none;
@@ -731,7 +732,9 @@ background-image: linear-gradient(135deg, rgba(20,15,10,0.85), rgba(20,15,10,0.7
   .btn-hamburger{width:34px; height:34px; min-width:34px; min-height:34px; max-width:34px; max-height:34px;}
   .marca img{height:54px !important;}
   .marca-texto{font-size:1.6rem;}
-  .nav-top-row{flex-wrap:wrap; row-gap:10px;}
+  .nav-main{flex-wrap:wrap; justify-content:center; row-gap:12px;}
+  .nav-actions-group{flex-wrap:wrap; justify-content:center; gap:10px;}
+  .nav-divider{display:none;}
   .hero .eyebrow{font-size:.85rem; padding:0 10px; margin-top:38px; margin-bottom:20px; text-align:center; width:100%;}
   .hero .eyebrow::before, .hero .eyebrow::after{display:none;}
   .quienes-texto .eyebrow{font-size:1rem; padding:0 10px; margin-bottom:16px;}
@@ -758,21 +761,22 @@ background-image: linear-gradient(135deg, rgba(20,15,10,0.85), rgba(20,15,10,0.7
 <body>
 <div class="topbar">
   <div class="nav-main">
-    <div class="nav-top-row">
-       <a href="/" class="marca">
-        <img src="https://res.cloudinary.com/sla80nsi/image/upload/v1785859184/vidplex_logo_transparente_uwghoc.png" alt="VidPlex" style="height:78px;width:auto;display:block;">
-      </a>
+    <a href="/" class="marca">
+      <img src="https://res.cloudinary.com/sla80nsi/image/upload/v1785859184/vidplex_logo_transparente_uwghoc.png" alt="VidPlex" style="height:78px;width:auto;display:block;">
+    </a>
+    <div class="nav-actions-group">
       <a href="/catalogo" class="btn-catalogo-nav">Catálogo</a>
       <a href="/catalogo" class="btn-cotizar">Contáctanos</a>
-    </div>
-    <div class="nav-menu-wrap">
-      <button class="btn-hamburger" id="btnHamburger" aria-label="Abrir menú" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-      <div class="nav-links" id="navLinks">
-        <a href="https://vidplex.com/nosotros/" target="_blank">Nosotros</a>
-        <a href="https://vidplex.com/productos/" target="_blank">Productos</a>
-        <a href="https://vidplex.com/proyectos/" target="_blank">Proyectos</a>
+      <span class="nav-divider"></span>
+      <div class="nav-menu-wrap">
+        <button class="btn-hamburger" id="btnHamburger" aria-label="Abrir menú" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links" id="navLinks">
+          <a href="https://vidplex.com/nosotros/" target="_blank">Nosotros</a>
+          <a href="https://vidplex.com/productos/" target="_blank">Productos</a>
+          <a href="https://vidplex.com/proyectos/" target="_blank">Proyectos</a>
+        </div>
       </div>
     </div>
   </div>
