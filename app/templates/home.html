@@ -151,6 +151,19 @@ body::before{
   border-color:rgba(255,255,255,0.2);
 }
 .btn-cotizar:hover::before{left:100%;}
+.btn-catalogo-nav{
+  background:linear-gradient(135deg, #4A5966 0%, #2A333A 100%);
+  color:#fff; font-size:.8rem; font-weight:700;
+  padding:12px 24px; border-radius:999px; text-decoration:none;
+  border:2px solid #ffffff;
+  box-shadow:0 4px 15px rgba(74,89,102,0.35);
+  transition:all .3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-catalogo-nav:hover{
+  transform:translateY(-2px) scale(1.02);
+  box-shadow:0 8px 25px rgba(74,89,102,0.5);
+  border-color:rgba(255,255,255,0.2);
+}
 .marca{
   display:flex;align-items:center;gap:14px;text-decoration:none; position:relative;
 }
@@ -339,7 +352,7 @@ background-image:
   background:rgba(228,87,46,0.2);
   border-color:rgba(228,87,46,0.4);
 }
-.nav-menu-wrap{position:relative; display:flex; align-items:center; justify-content:flex-start;}
+.nav-menu-wrap{position:relative; display:flex; align-items:center; justify-content:center; width:100%;}
 .btn-hamburger{
   width:40px; height:40px; min-width:40px; min-height:40px; max-width:40px; max-height:40px;
   border-radius:50%; padding:0; margin:0; appearance:none; -webkit-appearance:none;
@@ -714,10 +727,11 @@ background-image: linear-gradient(135deg, rgba(20,15,10,0.85), rgba(20,15,10,0.7
   .nav-links a{padding:8px 12px; font-size:.7rem;}
   .nav-main{padding:14px 18px 12px; gap:10px;}
   .nav-top-row{gap:10px;}
-  .btn-wa, .btn-cotizar{padding:8px 12px; font-size:.68rem; white-space:nowrap;}
+  .btn-wa, .btn-cotizar, .btn-catalogo-nav{padding:8px 12px; font-size:.68rem; white-space:nowrap;}
   .btn-hamburger{width:34px; height:34px; min-width:34px; min-height:34px; max-width:34px; max-height:34px;}
-  .marca img{height:42px !important;}
+  .marca img{height:54px !important;}
   .marca-texto{font-size:1.6rem;}
+  .nav-top-row{flex-wrap:wrap; row-gap:10px;}
   .hero .eyebrow{font-size:.85rem; padding:0 10px; margin-top:38px; margin-bottom:20px; text-align:center; width:100%;}
   .hero .eyebrow::before, .hero .eyebrow::after{display:none;}
   .quienes-texto .eyebrow{font-size:1rem; padding:0 10px; margin-bottom:16px;}
@@ -746,8 +760,9 @@ background-image: linear-gradient(135deg, rgba(20,15,10,0.85), rgba(20,15,10,0.7
   <div class="nav-main">
     <div class="nav-top-row">
        <a href="/" class="marca">
-        <img src="https://res.cloudinary.com/sla80nsi/image/upload/v1785859184/vidplex_logo_transparente_uwghoc.png" alt="VidPlex" style="height:58px;width:auto;display:block;">
+        <img src="https://res.cloudinary.com/sla80nsi/image/upload/v1785859184/vidplex_logo_transparente_uwghoc.png" alt="VidPlex" style="height:78px;width:auto;display:block;">
       </a>
+      <a href="/catalogo" class="btn-catalogo-nav">Catálogo</a>
       <a href="/catalogo" class="btn-cotizar">Contáctanos</a>
     </div>
     <div class="nav-menu-wrap">
@@ -755,7 +770,6 @@ background-image: linear-gradient(135deg, rgba(20,15,10,0.85), rgba(20,15,10,0.7
         <span></span><span></span><span></span>
       </button>
       <div class="nav-links" id="navLinks">
-        <a href="/catalogo">Catálogo</a>
         <a href="https://vidplex.com/nosotros/" target="_blank">Nosotros</a>
         <a href="https://vidplex.com/productos/" target="_blank">Productos</a>
         <a href="https://vidplex.com/proyectos/" target="_blank">Proyectos</a>
