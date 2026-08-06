@@ -24,7 +24,8 @@ body{
   position:fixed; top:0; left:0; right:0; z-index:1000;
   display:flex; flex-direction:column;
   padding:0;
-  border-bottom:1px solid rgba(255,255,255,0.06);
+  border-bottom:2px solid rgba(192,197,206,0.7);
+  box-shadow:0 2px 24px rgba(192,197,206,0.25), inset 0 -1px 0 rgba(192,197,206,0.4);
   background:linear-gradient(180deg, rgba(5,5,5,0.97) 0%, rgba(10,10,10,0.92) 50%, rgba(15,15,15,0.88) 100%);
   backdrop-filter:blur(32px) saturate(220%);
   -webkit-backdrop-filter:blur(32px) saturate(220%);
@@ -46,6 +47,9 @@ body{
   min-width:0;
   position:relative;
   overflow:hidden;
+  border:1.5px solid rgba(192,197,206,0.6);
+  border-top:none;
+  border-radius:10px 10px 20px 21px;
 }
 .nav-main::before{
   content:""; position:absolute; top:0; left:-40%; width:35%; height:100%;
@@ -256,31 +260,34 @@ background-image:
 @keyframes puntoDestello{
   0%,70%,100%{opacity:.4; transform:scale(.85);}
   40%{opacity:.9; transform:scale(1.05);}
-}
-.nav-links{display:flex;gap:10px;align-items:center;}
+}.nav-links{display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:center;}
 .nav-links a{
-  color:var(--gris); 
-  text-decoration:none; 
-  font-size:.85rem; 
-  font-weight:600;
-  letter-spacing:.08em;
+  color:#fff;
+  text-decoration:none;
+  font-size:.78rem;
+  font-weight:700;
+  letter-spacing:.05em;
   text-transform:uppercase;
-  padding:12px 22px;
+  padding:11px 20px;
   border-radius:999px;
   transition:all .3s cubic-bezier(0.4, 0, 0.2, 1);
   position:relative;
-  border:1px solid transparent;
+  border:1.5px solid rgba(255,255,255,0.9);
+}
+.nav-links a:nth-child(odd){
+  background:linear-gradient(135deg, #4A5966 0%, #2A333A 100%);
+  box-shadow:0 4px 15px rgba(74,89,102,0.35);
+}
+.nav-links a:nth-child(even){
+  background:#E4572E;
+  box-shadow:0 4px 15px rgba(228,87,46,0.3);
 }
 .nav-links a:hover{
-  color:var(--blanco);
-  background:rgba(228,87,46,0.12);
-  border-color:rgba(228,87,46,0.25);
-  box-shadow:0 4px 20px rgba(228,87,46,0.15);
+  transform:translateY(-2px) scale(1.03);
+  box-shadow:0 8px 25px rgba(0,0,0,0.4);
 }
 .nav-links a.active{
-  color:var(--blanco);
-  background:rgba(228,87,46,0.2);
-  border-color:rgba(228,87,46,0.4);
+  filter:brightness(1.15);
 }
 .seccion{padding:50px 0 70px;}
 .seccion h1{font-family:'Archivo Black',sans-serif;text-transform:uppercase;font-size:2rem;margin-bottom:8px;}
