@@ -301,6 +301,31 @@ def generar_qr_individual(ref_code, texto=TEXTO_QR):
     tarjeta_final.save(out_path)
     return out_path, url
 
+def generar_qr_admin(texto="Acceso panel VidPlex"):
+    """Genera el QR de acceso al login del panel de administración.
+    Se guarda directo en app/static/img/ para poder mostrarlo en la
+    plantilla del login con una ruta estática normal."""
+    url = f"{SITE_URL}/admin"
+
+    qr = qrcode.QRCode(
+        error_correction=ERROR_CORRECT_H,
+        box_size=12,
+        border=3,
+    )
+    qr.add_data(url)
+    qr.make(fit=True)
+    img = qr.make_image(fill_color=COLOR_QR, back_color="#FFFFFF").convert("RGBA")
+    img = _qr_a_transparente(img)
+
+    img = _agregar_logo(img)
+    tarjeta_final = _agregar_marco_y_texto(img, texto)
+
+    out_dir = os.path.join(BASE_DIR, 'app', 'static', 'img')
+    os.makedirs(out_dir, exist_ok=True)
+    out_path = os.path.join(out_dir, 'admin_qr.png')
+    tarjeta_final.save(out_path)
+    return out_path, url
+
 
 def main():
     db = conectar_db()
@@ -319,6 +344,10 @@ def main():
         print(f"  {p['ref_code']:<10} -> {path}   ({url})")
 
     print("\nListo. Imprime cada PNG junto a su vidrio correspondiente en el stand.")
+
+    print("\nGenerando QR de acceso al panel de administración...")
+    admin_path, admin_url = generar_qr_admin()
+    print(f"  admin_qr -> {admin_path}   ({admin_url})")
 
 
 if __name__ == '__main__':

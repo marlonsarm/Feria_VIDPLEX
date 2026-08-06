@@ -3,11 +3,15 @@
 {% block content %}
 <div class="admin-login-bg"></div>
 <div class="wrap admin-login-wrap">
-  <a href="/" class="marca admin-login-marca">
+<a href="/" class="marca admin-login-marca">
     <span class="marca-texto"><span class="letra">V</span><span class="letra">I</span><span class="letra">D</span><span class="letra">P</span><span class="letra">L</span><span class="letra">E</span><span class="letra">X</span></span>
     <span class="chispita"></span>
     <span class="puntos"><span></span><span></span><span></span></span>
   </a>
+
+<div style="display:flex; justify-content:center; margin:20px 0 28px;">
+    <img src="{{ url_for('static', filename='img/admin_qr.png') }}" alt="QR acceso admin" style="width:200px; height:auto; display:block;">
+  </div>
 
   <div class="card admin-login-card">
     <h2>Panel de administración</h2>
@@ -30,4 +34,5 @@
     </form>
   </div>
 </div>
+
 {% endblock %}

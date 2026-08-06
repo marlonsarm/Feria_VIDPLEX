@@ -74,9 +74,25 @@
 
   document.getElementById('btnRefrescar').addEventListener('click', function (e) {
     e.preventDefault();
-    cargar();
+    const btn = document.getElementById('btnRefrescar');
+    const icono = document.getElementById('iconoRefrescar');
+    const texto = document.getElementById('textoRefrescar');
+
+    btn.disabled = true;
+    icono.style.transform = 'rotate(360deg)';
+    texto.textContent = 'Actualizando...';
+
+    cargar().finally(function () {
+      texto.textContent = '¡Actualizado!';
+      setTimeout(function () {
+        texto.textContent = 'Refrescar ahora';
+        icono.style.transform = 'rotate(0deg)';
+        btn.disabled = false;
+      }, 1200);
+    });
   });
 
   cargar();
   setInterval(cargar, 30000); // se actualiza sola cada 30s
 })();
+

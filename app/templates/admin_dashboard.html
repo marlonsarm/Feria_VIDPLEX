@@ -36,7 +36,13 @@
 
   <div class="card">
     <h2>Contactos capturados</h2>
-    <p class="hint">Se actualiza solo cada 30 segundos. También puedes <a href="#" id="btnRefrescar" style="text-decoration:underline;">refrescar ahora</a>.</p>
+<p class="hint" style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+      <span>Se actualiza solo cada 30 segundos.</span>
+      <button type="button" id="btnRefrescar" style="display:inline-flex; align-items:center; gap:6px; padding:7px 14px; border-radius:999px; background:linear-gradient(135deg, #4A5966 0%, #2A333A 100%); border:1.5px solid rgba(255,255,255,0.9); color:#fff; font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.04em; cursor:pointer; box-shadow:0 4px 15px rgba(74,89,102,0.35); transition:transform .2s;">
+        <svg id="iconoRefrescar" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="transition:transform .5s ease;"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+        <span id="textoRefrescar">Refrescar ahora</span>
+      </button>
+    </p>
     <div style="overflow-x:auto;">
       <table style="width:100%; border-collapse:collapse; font-size:0.85rem; margin-top:6px;">
         <thead>
