@@ -52,7 +52,8 @@ body::before{
   position:fixed; top:0; left:0; right:0; z-index:1000;
   display:flex; flex-direction:column;
   padding-top:env(safe-area-inset-top);
-  border-bottom:1px solid rgba(255,255,255,0.06);
+  border-bottom:1px solid rgba(192,197,206,0.3);
+  box-shadow:0 1px 12px rgba(192,197,206,0.08);
   background:linear-gradient(180deg, rgba(5,5,5,0.97) 0%, rgba(10,10,10,0.92) 50%, rgba(15,15,15,0.88) 100%);
   backdrop-filter:blur(32px) saturate(220%);
   -webkit-backdrop-filter:blur(32px) saturate(220%);
@@ -353,7 +354,7 @@ background-image:
   background:rgba(228,87,46,0.2);
   border-color:rgba(228,87,46,0.4);
 }
-.nav-menu-wrap{position:relative; display:flex; align-items:center; justify-content:flex-end;}
+.nav-menu-wrap{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); display:flex; align-items:center;}
 .btn-hamburger{
   width:40px; height:40px; min-width:40px; min-height:40px; max-width:40px; max-height:40px;
   border-radius:50%; padding:0; margin:0; appearance:none; -webkit-appearance:none;
@@ -764,20 +765,19 @@ background-image: linear-gradient(135deg, rgba(20,15,10,0.85), rgba(20,15,10,0.7
     <a href="/" class="marca">
       <img src="https://res.cloudinary.com/sla80nsi/image/upload/v1785859184/vidplex_logo_transparente_uwghoc.png" alt="VidPlex" style="height:78px;width:auto;display:block;">
     </a>
+   <div class="nav-menu-wrap">
+      <button class="btn-hamburger" id="btnHamburger" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links" id="navLinks">
+        <a href="https://vidplex.com/nosotros/" target="_blank">Nosotros</a>
+        <a href="https://vidplex.com/productos/" target="_blank">Productos</a>
+        <a href="https://vidplex.com/proyectos/" target="_blank">Proyectos</a>
+      </div>
+    </div>
     <div class="nav-actions-group">
       <a href="/catalogo" class="btn-catalogo-nav">Catálogo</a>
-      <a href="/catalogo" class="btn-cotizar">Contáctanos</a>
-      <span class="nav-divider"></span>
-      <div class="nav-menu-wrap">
-        <button class="btn-hamburger" id="btnHamburger" aria-label="Abrir menú" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
-        <div class="nav-links" id="navLinks">
-          <a href="https://vidplex.com/nosotros/" target="_blank">Nosotros</a>
-          <a href="https://vidplex.com/productos/" target="_blank">Productos</a>
-          <a href="https://vidplex.com/proyectos/" target="_blank">Proyectos</a>
-        </div>
-      </div>
+      <a href="/catalogo" class="btn-cotizar">Contacta un asesor</a>
     </div>
   </div>
 </div>
