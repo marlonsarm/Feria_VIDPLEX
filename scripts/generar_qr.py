@@ -37,7 +37,7 @@ OUT_DIR = os.path.join(BASE_DIR, 'qr_generados')
 LOGO_PATH = os.path.join(BASE_DIR, 'app', 'static', 'img', 'logo_DEFINITIVO.png')
 
 # Texto que aparece debajo del QR (puedes cambiarlo aquí)
-TEXTO_QR = "VIDPLEX transformó este vidrio"
+TEXTO_QR = "Escanéa y descubre por qué este vidrio es único"
 
 # --- Configuración visual ---
 # Si es True: el fondo del QR y de la franja de texto queda TRANSPARENTE
@@ -327,6 +327,30 @@ def generar_qr_admin(texto="Acceso panel VidPlex"):
     return out_path, url
 
 
+def generar_qr_video_dvh(texto="Escanéame para información técnica"):
+    """Genera el QR que lleva a la sección del video DVH con persianas
+    integradas, en la página oficial vidplex.com (ancla #video-dvh)."""
+    url = "https://vidplex.com/#video-dvh"
+
+    qr = qrcode.QRCode(
+        error_correction=ERROR_CORRECT_H,
+        box_size=12,
+        border=3,
+    )
+    qr.add_data(url)
+    qr.make(fit=True)
+    img = qr.make_image(fill_color=COLOR_QR, back_color="#FFFFFF").convert("RGBA")
+    img = _qr_a_transparente(img)
+
+    img = _agregar_logo(img)
+    tarjeta_final = _agregar_marco_y_texto(img, texto)
+
+    os.makedirs(OUT_DIR, exist_ok=True)
+    out_path = os.path.join(OUT_DIR, "video_dvh.png")
+    tarjeta_final.save(out_path)
+    return out_path, url
+
+
 def main():
     db = conectar_db()
     cur = db.cursor()
@@ -348,6 +372,10 @@ def main():
     print("\nGenerando QR de acceso al panel de administración...")
     admin_path, admin_url = generar_qr_admin()
     print(f"  admin_qr -> {admin_path}   ({admin_url})")
+
+    print("\nGenerando QR del video DVH (vidplex.com)...")
+    video_path, video_url = generar_qr_video_dvh()
+    print(f"  video_dvh -> {video_path}   ({video_url})")
 
 
 if __name__ == '__main__':
