@@ -1,15 +1,13 @@
-# Archivo maestro: 36 vidrios originales + 41 vidrios nuevos = 77 en total.
+# Archivo maestro: 30 genericos + 6 refrigeracion (inactivos) + 41 reales = 77.
 # Las "especificaciones" marcadas como "[completar]" necesitan el dato
-# técnico real (espesor, composición, factor solar, etc.) para no
-# inventar cifras que le lleguen a un cliente.
+# tecnico real (espesor, composicion, factor solar, etc.).
 #
-# Cuando termines de editar, corres el script que sube esto a la
-# base de datos (te lo doy después de que confirmes que este archivo
-# está bien).
+# Para subir cambios: python scripts/actualizar_vidrios.py (con el
+# tunel de Railway abierto).
 
 VIDRIOS = [
     # ============================================================
-    # 36 VIDRIOS ORIGINALES
+    # 30 VIDRIOS GENERICOS (restaurados)
     # ============================================================
     {
         "ref_code": "VP-001",
@@ -129,66 +127,6 @@ VIDRIOS = [
         "especificaciones": "[completar]",
         "imagen_principal": "/static/img/vidrios/VP-012.jpg",
         "categoria": "confort",
-        "activo": 1,
-    },
-    {
-        "ref_code": "VP-013",
-        "nombre": "Vidrio DVH Refrigeración Comercial",
-        "tipo_vidrio": "DVH",
-        "descripcion": "Doble vidriado hermético para cámaras de refrigeración.",
-        "especificaciones": "[completar]",
-        "imagen_principal": "/static/img/vidrios/VP-013.jpg",
-        "categoria": "refrigeracion",
-        "activo": 1,
-    },
-    {
-        "ref_code": "VP-014",
-        "nombre": "Vidrio Bajo Emisivo Refrigeración",
-        "tipo_vidrio": "Low-E",
-        "descripcion": "Control térmico para vitrinas refrigeradas.",
-        "especificaciones": "[completar]",
-        "imagen_principal": "/static/img/vidrios/VP-014.jpg",
-        "categoria": "refrigeracion",
-        "activo": 1,
-    },
-    {
-        "ref_code": "VP-015",
-        "nombre": "Vidrio Antiempañante Refrigeración",
-        "tipo_vidrio": "Antiempañante",
-        "descripcion": "Evita condensación en cuartos fríos y neveras.",
-        "especificaciones": "[completar]",
-        "imagen_principal": "/static/img/vidrios/VP-015.jpg",
-        "categoria": "refrigeracion",
-        "activo": 1,
-    },
-    {
-        "ref_code": "VP-016",
-        "nombre": "Vidrio Termopanel Refrigeración",
-        "tipo_vidrio": "Termopanel",
-        "descripcion": "Aislamiento para exhibidores refrigerados.",
-        "especificaciones": "[completar]",
-        "imagen_principal": "/static/img/vidrios/VP-016.jpg",
-        "categoria": "refrigeracion",
-        "activo": 1,
-    },
-    {
-        "ref_code": "VP-017",
-        "nombre": "Vidrio Triple Panel Refrigeración",
-        "tipo_vidrio": "Triple Panel",
-        "descripcion": "Máximo aislamiento térmico para cuartos fríos.",
-        "especificaciones": "[completar]",
-        "imagen_principal": "/static/img/vidrios/VP-017.jpg",
-        "categoria": "refrigeracion",
-        "activo": 1,
-    },
-    {
-        "ref_code": "VP-018",
-        "nombre": "Vidrio Curvo Refrigeración",
-        "tipo_vidrio": "Curvo",
-        "descripcion": "Vidrio curvo para vitrinas de refrigeración.",
-        "especificaciones": "[completar]",
-        "imagen_principal": "/static/img/vidrios/VP-018.jpg",
-        "categoria": "refrigeracion",
         "activo": 1,
     },
     {
@@ -373,7 +311,7 @@ VIDRIOS = [
     },
 
     # ============================================================
-    # 41 VIDRIOS NUEVOS (VP-037 a VP-077)
+    # 41 VIDRIOS REALES (VP-037 a VP-077)
     # ============================================================
 
     # ---------- CONFORT ----------

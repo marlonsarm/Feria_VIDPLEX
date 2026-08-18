@@ -904,6 +904,44 @@ background-image: linear-gradient(135deg, rgba(20,15,10,0.85), rgba(20,15,10,0.7
   </div>
 </footer>
 
+<!-- MODAL BLOQUEANTE - Captura de leads en el HOME -->
+<div class="home-lead-modal" id="homeLeadModal">
+  <div class="home-lead-backdrop"></div>
+  <div class="home-lead-content">
+    <div class="home-lead-header">
+      <span class="marca-texto" style="font-size:1.3rem;">VIDPLEX</span>
+    </div>
+    <h2>Cada vidrio tiene su historia.<br><span style="color:var(--acento);">Descúbrela.</span></h2>
+    <p class="home-lead-hint">Déjanos tus datos para que puedas explorar todo nuestro catálogo, con asesoría personalizada en menos de 24h.</p>
+
+    <form id="homeLeadForm" novalidate>
+      <div style="position:absolute;left:-9999px;top:-9999px;opacity:0;">
+        <input type="text" name="website_home" tabindex="-1" autocomplete="off">
+      </div>
+
+      <div class="home-lead-field">
+        <label for="homeNombre">Nombre completo</label>
+        <input type="text" id="homeNombre" placeholder="Ej. María Gómez" autocomplete="name" required>
+      </div>
+      <div class="home-lead-field">
+        <label for="homeTelefono">Teléfono</label>
+        <input type="tel" id="homeTelefono" placeholder="Ej. 300 123 4567" autocomplete="tel" required>
+      </div>
+      <div class="home-lead-field">
+        <label for="homeCorreo">Correo electrónico</label>
+        <input type="email" id="homeCorreo" placeholder="Ej. maria@correo.com" autocomplete="email" required>
+      </div>
+
+      <div class="home-lead-check">
+        <input type="checkbox" id="homeAutorizo" required>
+        <label for="homeAutorizo">Autorizo a VidPlex a contactarme y tratar mis datos conforme a la Ley 1581 de 2012.</label>
+      </div>
+
+      <button type="submit" class="btn-primario" id="homeLeadSubmit" style="width:100%; margin-top:6px;">Ver el catálogo</button>
+    </form>
+  </div>
+</div>
+
 <!-- Modal escáner QR -->
 <div class="scanner-modal" id="scannerModal">
   <button class="scanner-close" onclick="cerrarScanner()">✕</button>

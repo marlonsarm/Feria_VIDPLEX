@@ -345,3 +345,7 @@ def admin_export():
     resp = Response(buffer.getvalue(), mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
     resp.headers['Content-Disposition'] = f'attachment; filename={filename}'
     return resp
+    filename = f"vidplex_leads_{datetime.now(BOGOTA_TZ).strftime('%Y%m%d_%H%M')}.xlsx"
+    resp = Response(buffer.getvalue(), mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    resp.headers['Content-Disposition'] = f'attachment; filename={filename}'
+    return resp

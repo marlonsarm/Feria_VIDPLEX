@@ -19,15 +19,15 @@ with app.app_context():
         if existe:
             cur.execute("""
                 UPDATE productos 
-                SET nombre=%s, tipo_vidrio=%s, descripcion=%s, especificaciones=%s, imagen_principal=%s, activo=%s
+                SET nombre=%s, tipo_vidrio=%s, descripcion=%s, especificaciones=%s, imagen_principal=%s, categoria=%s, activo=%s
                 WHERE ref_code=%s
-            """, (v["nombre"], v["tipo_vidrio"], v["descripcion"], v["especificaciones"], v["imagen_principal"], v["activo"], v["ref_code"]))
+            """, (v["nombre"], v["tipo_vidrio"], v["descripcion"], v["especificaciones"], v["imagen_principal"], v.get("categoria"), v["activo"], v["ref_code"]))
             print(f"Actualizado: {v['ref_code']}")
         else:
             cur.execute("""
-                INSERT INTO productos (ref_code, nombre, tipo_vidrio, descripcion, especificaciones, imagen_principal, activo)
-                VALUES (%s, %s, %s, %s, %s, %s, %s)
-            """, (v["ref_code"], v["nombre"], v["tipo_vidrio"], v["descripcion"], v["especificaciones"], v["imagen_principal"], v["activo"]))
+                INSERT INTO productos (ref_code, nombre, tipo_vidrio, descripcion, especificaciones, imagen_principal, categoria, activo)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+            """, (v["ref_code"], v["nombre"], v["tipo_vidrio"], v["descripcion"], v["especificaciones"], v["imagen_principal"], v.get("categoria"), v["activo"]))
             print(f"Insertado: {v['ref_code']}")
 
     db.commit()

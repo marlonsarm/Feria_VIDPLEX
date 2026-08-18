@@ -71,7 +71,12 @@ def _cargar_fuente(tamano):
     for ruta in candidatos:
         if os.path.exists(ruta):
             try:
-                return ImageFont.truetype(ruta, tamano)
+                fuente = ImageFont.truetype(ruta, tamano)
+                try:
+                    fuente.set_variation_by_name('Bold')
+                except Exception:
+                    pass
+                return fuente
             except Exception:
                 continue
     return ImageFont.load_default()
@@ -194,7 +199,6 @@ def _hex_a_rgb(hex_color):
     hex_color = hex_color.lstrip("#")
     return tuple(int(hex_color[i:i + 2], 16) for i in (0, 2, 4))
 
-
 def _agregar_logo(img_qr):
     """Pega el logo centrado sobre el QR, dentro de una placa negra
     (mismo color que el QR) con filo metálico y sombra sutil, para que
@@ -222,8 +226,6 @@ def _agregar_logo(img_qr):
     placa.paste(logo, (pad_x, pad_y), logo)
     img_qr.alpha_composite(placa, ((qr_w - card_w) // 2, (qr_h - card_h) // 2))
     return img_qr
-
-
 def _agregar_marco_y_texto(img_qr, texto):
     """Arma la tarjeta final: fondo plateado degradado continuo (QR + texto
     en una sola pieza, sin costuras) con borde negro fino alrededor.
@@ -243,8 +245,6 @@ def _agregar_marco_y_texto(img_qr, texto):
 
     draw = ImageDraw.Draw(tarjeta)
 
-    # Texto en MAYÚSCULAS, directo sobre el fondo plateado (ya no necesita
-    # su propia placa: toda la tarjeta comparte el mismo degradado)
     fuente = _cargar_fuente(27)
     max_ancho_texto = ancho_final - 40
     lineas = textwrap.wrap(texto, width=24)
@@ -266,10 +266,8 @@ def _agregar_marco_y_texto(img_qr, texto):
         y_texto += alto_linea
 
     if FONDO_TRANSPARENTE:
-        # Ya es RGBA con fondo transparente, no hace falta enmascarar
         return tarjeta
 
-    # Máscara con esquinas redondeadas para toda la tarjeta (solo modo blanco)
     mascara = Image.new("L", tarjeta.size, 0)
     draw_m = ImageDraw.Draw(mascara)
     draw_m.rounded_rectangle([0, 0, ancho_final - 1, alto_final - 1], radius=RADIO_ESQUINAS, fill=255)
