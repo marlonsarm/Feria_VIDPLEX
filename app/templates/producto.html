@@ -86,9 +86,14 @@
 
     {% if specs %}
     <div class="specs">
-      <dl>
+           <dl>
         {% for k, v in specs %}
-        <div class="fila"><span class="k">{{ k }}</span><span class="v">{{ v }}</span></div>
+        <div class="fila">
+          <span class="k">
+            {% if k|lower == 'separador' %}<img src="/static/img/logo_swisspacer.png" alt="Swisspacer" style="height:13px;width:auto;vertical-align:middle;margin-right:6px;">{% endif %}{{ k }}
+          </span>
+          <span class="v">{{ v }}</span>
+        </div>
         {% endfor %}
       </dl>
     </div>

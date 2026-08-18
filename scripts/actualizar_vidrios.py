@@ -4,7 +4,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 from app import create_app
 from app.db import get_db
-from vidrios_data import VIDRIOS
+from vidrios_data_COMPLETO import VIDRIOS
 
 app = create_app()
 
