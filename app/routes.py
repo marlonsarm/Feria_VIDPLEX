@@ -160,10 +160,12 @@ def crear_lead():
     db = get_db()
     cur = db.cursor()
 
-    cur.execute("SELECT id FROM productos WHERE ref_code = %s", (ref_code,))
-    prod = cur.fetchone()
-    if not prod:
-        return jsonify({'ok': False, 'error': 'Producto no encontrado.'}), 404
+    prod = None
+    if ref_code:
+        cur.execute("SELECT id FROM productos WHERE ref_code = %s", (ref_code,))
+        prod = cur.fetchone()
+        if not prod:
+            return jsonify({'ok': False, 'error': 'Producto no encontrado.'}), 404
 
     # Deduplicar por TELEFONO (identificador unico de persona)
     # Si ya existe: NO se sobreescriben datos originales, solo se agrega vidrio visto
@@ -188,10 +190,11 @@ def crear_lead():
         lead_id = cur.lastrowid
 
     # Vincular este lead con el vidrio que vio (sin duplicar si ya estaba)
-    cur.execute(
-        "INSERT IGNORE INTO lead_producto (lead_id, producto_id) VALUES (%s, %s)",
-        (lead_id, prod['id'])
-    )
+    if prod:
+        cur.execute(
+            "INSERT IGNORE INTO lead_producto (lead_id, producto_id) VALUES (%s, %s)",
+            (lead_id, prod['id'])
+        )
     db.commit()
 
     return jsonify({'ok': True})
