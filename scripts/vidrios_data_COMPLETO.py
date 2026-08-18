@@ -408,10 +408,10 @@ VIDRIOS = [
         "imagen_principal": "/static/img/vidrios/VP-041.jpg", "categoria": "confort", "activo": 1,
     },
     {
-        "ref_code": "VP-042", "nombre": "DVH Confort Violeta", "tipo_vidrio": "DVH",
+        "ref_code": "VP-042", "nombre": "DVH Arquitectonico Violeta", "tipo_vidrio": "DVH",
         "descripcion": "Doble vidriado hermético en tono violeta, para fachadas y espacios con identidad visual distintiva.",
         "especificaciones": "[completar]",
-        "imagen_principal": "/static/img/vidrios/VP-042.jpg", "categoria": "confort", "activo": 1,
+        "imagen_principal": "/static/img/vidrios/VP-042.jpg", "categoria": "arquitectonico", "activo": 1,
     },
     {
         "ref_code": "VP-044", "nombre": "DVH Confort Negro", "tipo_vidrio": "DVH",
@@ -426,16 +426,16 @@ VIDRIOS = [
         "imagen_principal": "/static/img/vidrios/VP-045.jpg", "categoria": "confort", "activo": 1,
     },
     {
-        "ref_code": "VP-046", "nombre": "DVH Confort Violeta", "tipo_vidrio": "DVH",
+        "ref_code": "VP-046", "nombre": "DVH Arquitectonico Violeta", "tipo_vidrio": "DVH",
         "descripcion": "Doble vidriado hermético en tono violeta, para fachadas y espacios con identidad visual distintiva.",
         "especificaciones": "[completar]",
-        "imagen_principal": "/static/img/vidrios/VP-046.jpg", "categoria": "confort", "activo": 1,
+        "imagen_principal": "/static/img/vidrios/VP-046.jpg", "categoria": "arquitectonico", "activo": 1,
     },
     {
-        "ref_code": "VP-047", "nombre": "DVH Confort Verde", "tipo_vidrio": "DVH",
+        "ref_code": "VP-047", "nombre": "DVH Arquitectonico Verde", "tipo_vidrio": "DVH",
         "descripcion": "Doble vidriado hermético en tono verde, aporta un aire natural al espacio sin perder desempeño térmico.",
         "especificaciones": "[completar]",
-        "imagen_principal": "/static/img/vidrios/VP-047.jpg", "categoria": "confort", "activo": 1,
+        "imagen_principal": "/static/img/vidrios/VP-047.jpg", "categoria": "arquitectonico", "activo": 1,
     },
     {
         "ref_code": "VP-049", "nombre": "DVH Confort Design", "tipo_vidrio": "DVH",
@@ -462,16 +462,16 @@ VIDRIOS = [
         "imagen_principal": "/static/img/vidrios/VP-052.jpg", "categoria": "confort", "activo": 1,
     },
     {
-        "ref_code": "VP-056", "nombre": "DVH Confort Verde", "tipo_vidrio": "DVH",
+        "ref_code": "VP-056", "nombre": "DVH Arquitectonico Verde", "tipo_vidrio": "DVH",
         "descripcion": "Doble vidriado hermético en tono verde, aporta un aire natural al espacio sin perder desempeño térmico.",
         "especificaciones": "[completar]",
-        "imagen_principal": "/static/img/vidrios/VP-056.jpg", "categoria": "confort", "activo": 1,
+        "imagen_principal": "/static/img/vidrios/VP-056.jpg", "categoria": "arquitectonico", "activo": 1,
     },
     {
-        "ref_code": "VP-057", "nombre": "DVH Confort Rojo Dip", "tipo_vidrio": "DVH",
+        "ref_code": "VP-057", "nombre": "DVH Arquitectonico Rojo Dip", "tipo_vidrio": "DVH",
         "descripcion": "Doble vidriado hermético en tono rojo Dip, para proyectos que buscan un acento de color audaz.",
         "especificaciones": "[completar]",
-        "imagen_principal": "/static/img/vidrios/VP-057.jpg", "categoria": "confort", "activo": 1,
+        "imagen_principal": "/static/img/vidrios/VP-057.jpg", "categoria": "arquitectonico", "activo": 1,
     },
     {
         "ref_code": "VP-058", "nombre": "DVH Confort Blanco", "tipo_vidrio": "DVH",
@@ -492,10 +492,10 @@ VIDRIOS = [
         "imagen_principal": "/static/img/vidrios/VP-060.jpg", "categoria": "confort", "activo": 1,
     },
     {
-        "ref_code": "VP-067", "nombre": "DVH Confort Verde", "tipo_vidrio": "DVH",
+        "ref_code": "VP-067", "nombre": "DVH Arquitectonico Verde", "tipo_vidrio": "DVH",
         "descripcion": "Doble vidriado hermético en tono verde, aporta un aire natural al espacio sin perder desempeño térmico.",
         "especificaciones": "[completar]",
-        "imagen_principal": "/static/img/vidrios/VP-067.jpg", "categoria": "confort", "activo": 1,
+        "imagen_principal": "/static/img/vidrios/VP-067.jpg", "categoria": "arquitectonico", "activo": 1,
     },
     {
         "ref_code": "VP-069", "nombre": "DVH Confort Blanco", "tipo_vidrio": "DVH",
@@ -504,10 +504,10 @@ VIDRIOS = [
         "imagen_principal": "/static/img/vidrios/VP-069.jpg", "categoria": "confort", "activo": 1,
     },
     {
-        "ref_code": "VP-070", "nombre": "DVH Confort Rojo Dip", "tipo_vidrio": "DVH",
+        "ref_code": "VP-070", "nombre": "DVH Arquitectonico Rojo Dip", "tipo_vidrio": "DVH",
         "descripcion": "Doble vidriado hermético en tono rojo Dip, para proyectos que buscan un acento de color audaz.",
         "especificaciones": "[completar]",
-        "imagen_principal": "/static/img/vidrios/VP-070.jpg", "categoria": "confort", "activo": 1,
+        "imagen_principal": "/static/img/vidrios/VP-070.jpg", "categoria": "arquitectonico", "activo": 1,
     },
     {
         "ref_code": "VP-071", "nombre": "DVH Confort Azul Median Blue", "tipo_vidrio": "DVH",

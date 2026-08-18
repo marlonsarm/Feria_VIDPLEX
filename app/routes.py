@@ -79,7 +79,7 @@ def home():
 CATEGORIAS = [
     {'slug': 'design',         'nombre': 'Design',          'imagen': 'https://vidplex.com/wp-content/uploads/2023/02/design_.png'},
     {'slug': 'confort',        'nombre': 'Confort',         'imagen': 'https://vidplex.com/wp-content/uploads/2023/02/3d-house-interior.jpg'},
-    {'slug': 'refrigeracion',  'nombre': 'Refrigeración',   'imagen': 'https://vidplex.com/wp-content/uploads/2023/02/refrigeraci.png'},
+    {'slug': 'arquitectonico', 'nombre': 'Arquitectónico',  'imagen': 'https://vidplex.com/wp-content/uploads/2023/02/design_.png'},
     {'slug': 'control-solar',  'nombre': 'Control Solar',   'imagen': 'https://vidplex.com/wp-content/uploads/2023/02/controlsolar.png'},
     {'slug': 'seguridad',      'nombre': 'Seguridad',       'imagen': 'https://vidplex.com/wp-content/uploads/2023/02/seg.png'},
     {'slug': 'alto-desempeno', 'nombre': 'Alto Desempeño',  'imagen': 'https://vidplex.com/wp-content/uploads/2023/02/altode.png'},
@@ -99,10 +99,9 @@ def catalogo_categoria(categoria):
     cur = db.cursor()
     cur.execute(
         "SELECT ref_code, nombre, tipo_vidrio, descripcion, imagen_principal "
-        "FROM productos WHERE activo = 1 AND categoria = %s ORDER BY nombre LIMIT 6",
+        "FROM productos WHERE activo = 1 AND categoria = %s ORDER BY nombre",
         (categoria,)
     )
-
     vidrios = list(cur.fetchall())
 
     return render_template('catalogo_categoria.html', vidrios=vidrios, categoria=cat)
