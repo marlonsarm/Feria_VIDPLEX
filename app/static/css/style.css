@@ -24,12 +24,19 @@ body{
 *{ box-sizing:border-box; margin:0; padding:0; }
 html{ scroll-behavior:smooth; overflow-x:hidden; width:100%; touch-action:manipulation; }
 body{
-  background:var(--negro);
+  background:var(--negro) url('/static/img/img%202.jpeg') center/cover fixed no-repeat;
   color:var(--blanco);
   font-family:'Inter', sans-serif;
   min-height:100vh;
   padding-top:140px;
   overflow-x:hidden;
+  position:relative;
+}
+body::before{
+  content:"";
+  position:fixed; inset:0; z-index:-1;
+  background:linear-gradient(180deg, rgba(10,10,10,0.93) 0%, rgba(10,10,10,0.90) 50%, rgba(10,10,10,0.95) 100%);
+  pointer-events:none;
 }
 img{ max-width:100%; display:block; }
 a{ color:inherit; }
