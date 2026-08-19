@@ -92,7 +92,7 @@
           <span class="k">
             {% if k|lower == 'separador' %}<img src="/static/img/logo_swisspacer.png" alt="Swisspacer" style="height:13px;width:auto;vertical-align:middle;margin-right:6px;">{% endif %}{{ k }}
           </span>
-          <span class="v">{{ v }}</span>
+          <span class="v">{% if v == '[completar]' %}<span style="font-size:.7rem;color:var(--gris);font-style:italic;">[completar]</span>{% else %}{{ v }}{% endif %}</span>
         </div>
         {% endfor %}
       </dl>

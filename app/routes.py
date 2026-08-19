@@ -56,6 +56,14 @@ def producto(ref_code):
                 k, v = parte.split(':', 1)
                 specs.append((k.strip(), v.strip()))
 
+    # Campos fijos que deben aparecer SIEMPRE, aunque falte cargar el dato.
+    # No modifica la base de datos: solo completa lo que falte al momento de mostrar.
+    CAMPOS_FIJOS = ['Espesor', 'Color', 'Separador']
+    claves_existentes = [k.lower() for k, v in specs]
+    for campo in CAMPOS_FIJOS:
+        if campo.lower() not in claves_existentes:
+            specs.append((campo, '[completar]'))
+
     return render_template('producto.html', producto=prod, media=media, specs=specs)
 
 
