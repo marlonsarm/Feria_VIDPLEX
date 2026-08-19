@@ -847,7 +847,8 @@ footer .foot-info{ font-size:0.72rem; color:var(--gris); font-family:monospace; 
 /* RESPONSIVE */
 @media (max-width:768px){
   .lead-modal-content{ flex-direction:column; max-height:95vh; }
-  .lead-modal-visual{ width:100%; height:180px; min-width:auto; }
+  .lead-modal-visual{ width:100%; height:200px; min-width:auto; }
+  .lead-modal-visual img{ object-position:center 30%; }
   .lead-modal-body{ padding:24px 20px; }
   .lead-field-row{ grid-template-columns:1fr; }
   .lead-hero-text h2{ font-size:1.15rem; }
