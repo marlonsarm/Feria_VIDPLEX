@@ -349,6 +349,52 @@ def generar_qr_video_dvh(texto="Escanéame para información técnica"):
     return out_path, url
 
 
+def generar_qr_home(texto="VIDPLEX transformó este vidrio, Escaneáme!"):
+    """Genera el QR que lleva al HOME de la app (donde primero se piden
+    los datos de contacto). Usa el logo negro en vez del blanco."""
+    url = SITE_URL
+
+    qr = qrcode.QRCode(
+        error_correction=ERROR_CORRECT_H,
+        box_size=12,
+        border=3,
+    )
+    qr.add_data(url)
+    qr.make(fit=True)
+    img = qr.make_image(fill_color=COLOR_QR, back_color="#FFFFFF").convert("RGBA")
+    img = _qr_a_transparente(img)
+
+    logo_path_original = LOGO_PATH
+    logo_negro_path = os.path.join(BASE_DIR, 'app', 'static', 'img', 'logo_negro_vidplex.png')
+
+    if os.path.exists(logo_negro_path):
+        logo = Image.open(logo_negro_path).convert("RGBA")
+        qr_w, qr_h = img.size
+        logo_target_w = int(qr_w * 0.34)
+        ratio = logo_target_w / logo.width
+        logo = logo.resize((logo_target_w, max(1, int(logo.height * ratio))), Image.LANCZOS)
+
+        pad_x = int(logo_target_w * 0.14)
+        pad_y = int(logo.height * 0.42)
+        card_w, card_h = logo.width + pad_x * 2, logo.height + pad_y * 2
+        radius = int(card_h * 0.26)
+
+        sombra = _sombra_tarjeta(card_w, card_h, radius)
+        img.alpha_composite(sombra, ((qr_w - sombra.width) // 2, (qr_h - sombra.height) // 2))
+
+        # Placa BLANCA (para que el logo negro se lea bien encima)
+        placa = _placa_plateada(card_w, card_h, radius)
+        placa.paste(logo, (pad_x, pad_y), logo)
+        img.alpha_composite(placa, ((qr_w - card_w) // 2, (qr_h - card_h) // 2))
+
+    tarjeta_final = _agregar_marco_y_texto(img, texto)
+
+    os.makedirs(OUT_DIR, exist_ok=True)
+    out_path = os.path.join(OUT_DIR, "home.png")
+    tarjeta_final.save(out_path)
+    return out_path, url
+
+
 def main():
     db = conectar_db()
     cur = db.cursor()
@@ -374,6 +420,10 @@ def main():
     print("\nGenerando QR del video DVH (vidplex.com)...")
     video_path, video_url = generar_qr_video_dvh()
     print(f"  video_dvh -> {video_path}   ({video_url})")
+
+    print("\nGenerando QR del home (logo negro)...")
+    home_path, home_url = generar_qr_home()
+    print(f"  home -> {home_path}   ({home_url})")
 
 
 if __name__ == '__main__':
