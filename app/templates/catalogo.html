@@ -325,7 +325,10 @@ background-image:
   .categorias-grid{grid-template-columns:repeat(2,1fr) !important; gap:14px;}
   .cat-card{height:220px;}
   .cat-card-overlay{padding:14px 16px;}
-  .cat-card-titulo{font-size:.85rem; word-break:break-word; line-height:1.25; display:block;}
+  .cat-card-titulo{font-size:.78rem; word-break:break-word; overflow-wrap:break-word; hyphens:auto; line-height:1.25; display:block;}
+}
+@media (max-width:360px){
+  .cat-card-titulo{font-size:.72rem;}
 }
 .vidrio-card{
   background:var(--negro-3); border:1px solid var(--gris-linea); border-top:3px solid var(--acento);
