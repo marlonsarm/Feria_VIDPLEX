@@ -42,16 +42,16 @@
     {% set foto_muestra = producto.imagen_principal if producto.imagen_principal else '/static/img/img%201.jpeg' %}
     {% set foto_uso = ('/static/img/' + media[0].url) if media and media|length > 0 else '/static/img/img%202.jpeg' %}
     <div class="duo-fotos">
-      <div class="foto-muestra">
-        <img src="{{ foto_muestra }}" alt="{{ producto.nombre }} - muestra" onerror="this.onerror=null; this.src='/static/img/img%201.jpeg';">
-        <div class="foto-overlay">
-          <span class="foto-tag">Muestra del vidrio</span>
+      <div>
+        <div class="foto-box-titulo">Muestra del vidrio</div>
+        <div class="foto-muestra">
+          <img src="{{ foto_muestra }}" alt="{{ producto.nombre }} - muestra" onerror="this.onerror=null; this.src='/static/img/img%201.jpeg';">
         </div>
       </div>
-      <div class="foto-uso">
-        <img src="{{ foto_uso }}" alt="{{ producto.nombre }} - en uso" onerror="this.onerror=null; this.src='/static/img/img%202.jpeg';">
-        <div class="foto-overlay">
-          <span class="foto-tag">En uso</span>
+      <div>
+        <div class="foto-box-titulo">En uso</div>
+        <div class="foto-uso">
+          <img src="{{ foto_uso }}" alt="{{ producto.nombre }} - en uso" onerror="this.onerror=null; this.src='/static/img/img%202.jpeg';">
         </div>
       </div>
     </div>
@@ -66,6 +66,7 @@
 
     {% if specs %}
     <div class="specs">
+      <div class="specs-titulo">Ficha técnica</div>
            <dl>
         {% for k, v in specs %}
         <div class="fila">

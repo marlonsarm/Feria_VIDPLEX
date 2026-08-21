@@ -112,25 +112,26 @@ a{ color:inherit; }
   color:#D6D6D6; font-size:1rem; line-height:1.6; max-width:620px;
 }
 .specs{
-  margin-top:20px; border-top:1px solid var(--gris-linea);
-  padding-top:4px;
+  margin-top:20px;
+  border:1px solid rgba(228,87,46,0.25);
+  border-radius:12px;
+  overflow:hidden;
 }
 .specs dl{ display:flex; flex-direction:column; }
 .specs .fila{
   display:flex; justify-content:space-between; align-items:center; gap:16px;
-  font-size:0.9rem; padding:18px 4px;
-  border-bottom:1px solid var(--gris-linea);
-  transition:padding-left .25s ease, border-color .25s ease;
+  font-size:0.9rem; padding:16px 20px;
+  border-bottom:1px solid rgba(228,87,46,0.12);
+  transition:background .2s ease;
 }
+.specs .fila:nth-child(even){ background:rgba(228,87,46,0.04); }
 .specs .fila:last-child{ border-bottom:none; }
-.specs .fila:hover{
-  padding-left:10px;
-  border-color:rgba(228,87,46,0.5);
-}
+.specs .fila:hover{ background:rgba(228,87,46,0.1); }
 .specs .fila .k{
-  color:var(--gris);
+  color:var(--acento);
   font-size:0.78rem;
   letter-spacing:0.04em;
+  font-weight:700;
   text-transform:uppercase;
 }
 .specs .fila .v{ text-align:right; font-weight:600; color:var(--blanco); }
@@ -1466,69 +1467,48 @@ footer .foot-info{ font-size:0.72rem; color:var(--gris); font-family:monospace; 
   backdrop-filter:blur(6px);
   background:rgba(28,28,28,0.85);
 }
-
 /* ---------- galeria producto: muestra + en uso ---------- */
 .duo-fotos{
-  position:relative;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:22px;
   max-width:1100px;
   margin:0 auto;
-  min-height:420px;
 }
-.foto-muestra{
+.foto-box-titulo{
+  font-family:'Archivo Black', sans-serif;
+  font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--acento); margin-bottom:10px;
+  display:flex; align-items:center; gap:8px;
+}
+.foto-box-titulo::before{
+  content:""; width:8px; height:8px; border-radius:50%;
+  background:var(--acento);
+}
+.foto-muestra, .foto-uso{
   position:relative;
   width:100%;
-  aspect-ratio:16/9;
-  border-radius:20px;
+  aspect-ratio:4/5;
+  border-radius:16px;
   overflow:hidden;
   border:1px solid rgba(192,192,192,0.15);
-  box-shadow:0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(192,192,192,0.03);
+  box-shadow:0 16px 40px rgba(0,0,0,0.45);
   background:var(--negro-2);
 }
-.foto-muestra img{
+.foto-muestra img, .foto-uso img{
   width:100%; height:100%; object-fit:cover;
   transition:transform 6s ease;
 }
-.foto-muestra:hover img{ transform:scale(1.05); }
-.foto-muestra .foto-overlay{
-  position:absolute; inset:0;
-  background:linear-gradient(0deg, rgba(10,10,10,0.85) 0%, transparent 45%);
-  display:flex; align-items:flex-end; padding:24px;
-}
-.foto-muestra .foto-tag{
-  display:inline-block;
-  background:rgba(228,87,46,0.9); color:#fff;
-  font-size:0.72rem; font-weight:700;
-  text-transform:uppercase; letter-spacing:0.06em;
-  padding:6px 14px; border-radius:999px;
-}
-.foto-uso{
-  position:absolute;
-  right:-16px; bottom:-36px;
-  width:44%;
-  max-width:280px;
-  aspect-ratio:4/5;
-  border-radius:12px 32px 12px 32px;
-  overflow:hidden;
-  border:4px solid var(--negro);
-  box-shadow:0 16px 40px rgba(0,0,0,0.55);
-  background:var(--negro-2);
-  z-index:2;
-}
-.foto-uso img{
-  width:100%; height:100%; object-fit:cover;
-  transition:transform 6s ease;
-}
-.foto-uso:hover img{ transform:scale(1.08); }
-.foto-uso .foto-overlay{
-  position:absolute; inset:0;
-  background:linear-gradient(0deg, rgba(10,10,10,0.85) 0%, transparent 50%);
-  display:flex; align-items:flex-end; padding:14px;
-}
-.foto-uso .foto-tag{
-  font-size:0.65rem; font-weight:700; color:#fff;
-  text-transform:uppercase; letter-spacing:0.05em;
-}
+.foto-muestra:hover img, .foto-uso:hover img{ transform:scale(1.05); }
 @media (max-width:640px){
-  .duo-fotos{ min-height:auto; padding-bottom:60px; }
-  .foto-uso{ width:58%; right:8px; bottom:-40px; }
+  .duo-fotos{ grid-template-columns:1fr; gap:26px; }
+  .foto-muestra, .foto-uso{ aspect-ratio:16/10; }
+}
+
+/* ---------- ficha tecnica con color ---------- */
+.specs-titulo{
+  background:linear-gradient(90deg, var(--acento) 0%, #C73A1A 100%);
+  color:#fff; font-family:'Archivo Black', sans-serif;
+  font-size:0.85rem; letter-spacing:0.06em; text-transform:uppercase;
+  padding:14px 20px;
 }
