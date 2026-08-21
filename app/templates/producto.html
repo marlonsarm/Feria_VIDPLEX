@@ -190,7 +190,8 @@
 <div class="lead-modal" id="leadModal">
   <div class="lead-modal-backdrop"></div>
   <div class="lead-modal-content">
-    
+    <button type="button" class="lead-modal-x" id="leadModalCloseProducto" aria-label="Cerrar">✕</button>
+
     <!-- IMAGEN LATERAL (espacio para foto real de la empresa) -->
     <div class="lead-modal-visual" style="display:block !important;visibility:visible !important;opacity:1 !important;position:relative;overflow:hidden;background:linear-gradient(135deg,#2C2720,#1A1714);aspect-ratio:3/4;width:calc(100% - 32px);max-width:320px;margin:16px auto 0 auto;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,0.4);">
 <img src="/static/img/img%201.jpeg" alt="VidPlex instalación" style="display:block !important;visibility:visible !important;opacity:1 !important;width:100%;height:100%;object-fit:cover;object-position:center 15%;" onerror="this.onerror=null;this.src='/static/img/img%202.jpeg';">
@@ -361,6 +362,13 @@
   // Solo se muestra si el visitante aun no ha dejado sus datos en NINGUN vidrio
   var yaEnvioDatos = localStorage.getItem('vidplex_lead_enviado') === 'true';
   if(modal && !yaEnvioDatos) modal.classList.add('show');
+
+  var closeBtnProducto = document.getElementById('leadModalCloseProducto');
+  if(closeBtnProducto){
+    closeBtnProducto.addEventListener('click', function(){
+      window.cerrarLeadModal();
+    });
+  }
   document.addEventListener('keydown', function(e){
     if(e.key === 'Escape' && modal && modal.classList.contains('show')){
       e.preventDefault();
