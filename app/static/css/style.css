@@ -447,10 +447,9 @@ footer .foot-info{ font-size:0.72rem; color:var(--gris); font-family:monospace; 
   letter-spacing:0.06em; margin-bottom:6px; font-weight:600;
 }
 .vidrio-card h3{
-  font-family:'Archivo Black', sans-serif; font-size:1.1rem; line-height:1.25; margin-bottom:8px;
+  font-family:'Archivo Black', sans-serif; font-size:clamp(0.85rem, 3vw, 1.1rem); line-height:1.25; margin-bottom:8px;
   text-transform:uppercase;
-  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
-  height:2.5em;
+  overflow-wrap:break-word; word-break:break-word;
 }
 .vidrio-card p{
   color:var(--gris); font-size:0.82rem; line-height:1.5;

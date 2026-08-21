@@ -89,7 +89,6 @@ CATEGORIAS = [
     {'slug': 'confort',        'nombre': 'Confort',         'imagen': 'https://vidplex.com/wp-content/uploads/2023/02/3d-house-interior.jpg'},
     {'slug': 'arquitectonico', 'nombre': 'Arquitectónico',  'imagen': 'https://vidplex.com/wp-content/uploads/2023/02/design_.png'},
     {'slug': 'control-solar',  'nombre': 'Control Solar',   'imagen': 'https://vidplex.com/wp-content/uploads/2023/02/controlsolar.png'},
-    {'slug': 'seguridad',      'nombre': 'Seguridad',       'imagen': 'https://vidplex.com/wp-content/uploads/2023/02/seg.png'},
     {'slug': 'alto-desempeno', 'nombre': 'Alto Desempeño',  'imagen': 'https://vidplex.com/wp-content/uploads/2023/02/altode.png'},
 ]
 @bp.route('/catalogo')
