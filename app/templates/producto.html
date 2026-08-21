@@ -32,51 +32,31 @@
   </div>
 </section>
 
-<!-- GALERÍA DEL VIDRIO - Espacio real para ver imágenes -->
+<!-- GALERÍA DEL VIDRIO - Muestra + En uso -->
 <section class="producto-galeria-seccion">
   <div class="wrap">
     <div class="galeria-header">
       <h3>Nuestro Producto</h3>
       <p>Explora cada detalle de este vidrio</p>
     </div>
-    <div class="producto-galeria">
-   <div class="galeria-main">
-{% if producto.video_url %}
-<video id="videoPrincipal" controls playsinline webkit-playsinline preload="auto">
-  <source src="{{ producto.video_url }}" type="video/mp4">
-  Tu navegador no soporta el elemento de video.
-</video>
-<div id="videoPosterWrap" class="video-poster-wrap" onclick="var v=document.getElementById('videoPrincipal'); if(v){ v.play(); document.getElementById('videoPosterWrap').style.display='none'; }">
-  <img id="videoPoster" class="video-poster-overlay" src="{{ producto.imagen_principal if producto.imagen_principal else '/static/img/img%201.jpeg' }}" alt="{{ producto.nombre }}" onerror="this.onerror=null; this.src='/static/img/img%201.jpeg';">
-  <div class="video-poster-center">
-    <div class="video-poster-play">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
-    </div>
-    <span class="video-poster-label">Toca para reproducir</span>
-  </div>
-</div>
-<img id="imagenPrincipal" src="{{ producto.imagen_principal if producto.imagen_principal else '/static/img/img%201.jpeg' }}" alt="{{ producto.nombre }}" onerror="this.onerror=null; this.src='/static/img/img%201.jpeg';" style="display:none;">
-{% else %}
-<img id="imagenPrincipal" src="{{ producto.imagen_principal if producto.imagen_principal else '/static/img/img%201.jpeg' }}" alt="{{ producto.nombre }}" onerror="this.onerror=null; this.src='/static/img/img%201.jpeg';">
-{% endif %}
-      </div>
-  {% set img_principal_url = producto.imagen_principal if producto.imagen_principal else '/static/img/img%201.jpeg' %}
-      <div class="galeria-thumbs">
-      <div class="thumb-item" data-index="01" id="thumb01" data-real="{{ img_principal_url }}" onclick="cambiarImagen(this, this.style.backgroundImage.slice(5,-2))"></div>
-        <div class="thumb-item" data-index="02" onclick="cambiarImagen(this, '/static/img/img%201.jpeg')" style="background-image:url('/static/img/img%201.jpeg')"></div>
-      <div class="thumb-item" data-index="03" onclick="cambiarImagen(this, '/static/img/fachada_diamante.jpeg')" style="background-image:url('/static/img/fachada_diamante.jpeg')"></div>
-      {% if producto.video_url %}
-      <div class="thumb-item thumb-video active" id="thumbVideo" data-index="VIDEO" data-real="{{ img_principal_url }}" onclick="reproducirVideo(this)">
-          <div class="thumb-play-icon">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
-          </div>
+    {% set foto_muestra = producto.imagen_principal if producto.imagen_principal else '/static/img/img%201.jpeg' %}
+    {% set foto_uso = ('/static/img/' + media[0].url) if media and media|length > 0 else '/static/img/img%202.jpeg' %}
+    <div class="duo-fotos">
+      <div class="foto-muestra">
+        <img src="{{ foto_muestra }}" alt="{{ producto.nombre }} - muestra" onerror="this.onerror=null; this.src='/static/img/img%201.jpeg';">
+        <div class="foto-overlay">
+          <span class="foto-tag">Muestra del vidrio</span>
         </div>
-      {% endif %}
+      </div>
+      <div class="foto-uso">
+        <img src="{{ foto_uso }}" alt="{{ producto.nombre }} - en uso" onerror="this.onerror=null; this.src='/static/img/img%202.jpeg';">
+        <div class="foto-overlay">
+          <span class="foto-tag">En uso</span>
+        </div>
       </div>
     </div>
   </div>
 </section>
-
 <div class="wrap">
   <div class="contenido">
     {% if producto.descripcion %}
@@ -307,69 +287,7 @@
 {% endif %}
 <script>
 
-// Cambiar la imagen principal de la galería al hacer clic en una miniatura
-function cambiarImagen(thumb, url){
-  if(!url) return;
-  var principal = document.getElementById('imagenPrincipal');
-  var video = document.getElementById('videoPrincipal');
-var poster = document.getElementById('videoPosterWrap');
-  if(video){ video.pause(); video.style.display = 'none'; }
-  if(poster){ poster.style.display = 'none'; }
-  if(principal){ principal.style.display = 'block'; principal.src = url; }
 
-  var thumbs = document.querySelectorAll('.thumb-item');
-  thumbs.forEach(function(t){ t.classList.remove('active'); });
-  thumb.classList.add('active');
-}
-
-// Volver a mostrar el video en el espacio grande de la galería
-function reproducirVideo(thumb){
-  var principal = document.getElementById('imagenPrincipal');
-  var video = document.getElementById('videoPrincipal');
-  if(!video) return;
-  if(principal) principal.style.display = 'none';
-  video.style.display = 'block';
-  video.pause();
-  video.currentTime = 0;
-  var poster = document.getElementById('videoPosterWrap');
-  if(poster) poster.style.display = 'flex';
-
-  var thumbs = document.querySelectorAll('.thumb-item');
-  thumbs.forEach(function(t){ t.classList.remove('active'); });
-  thumb.classList.add('active');
-}
-
-// Ocultar la imagen de fondo del video en cuanto empiece a reproducirse
-(function(){
-  var video = document.getElementById('videoPrincipal');
-  var poster = document.getElementById('videoPosterWrap');
-  if(!video || !poster) return;
-  video.addEventListener('play', function(){ poster.style.display = 'none'; });
-})();
-
-// Miniatura 01: probar si la imagen real existe, si no, usar el fallback
-(function(){
-  var thumb01 = document.getElementById('thumb01');
-  if(!thumb01) return;
-  var real = thumb01.getAttribute('data-real');
-  var fallback = '/static/img/img%201.jpeg';
-  var test = new Image();
-  test.onload = function(){ thumb01.style.backgroundImage = "url('" + real + "')"; };
-  test.onerror = function(){ thumb01.style.backgroundImage = "url('" + fallback + "')"; };
-  test.src = real;
-})();
-
-// Miniatura de video: probar si la imagen real carga, si no, usar el fallback
-(function(){
-  var thumbVideo = document.getElementById('thumbVideo');
-  if(!thumbVideo) return;
-  var real = thumbVideo.getAttribute('data-real');
-  var fallback = '/static/img/img%201.jpeg';
-  var test = new Image();
-  test.onload = function(){ thumbVideo.style.backgroundImage = "url('" + real + "')"; };
-  test.onerror = function(){ thumbVideo.style.backgroundImage = "url('" + fallback + "')"; };
-  test.src = real;
-})();
 // Hero: probar si la imagen real existe, si no, usar el fallback
 (function(){
   var hero = document.getElementById('heroProducto');
