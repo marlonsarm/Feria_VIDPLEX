@@ -1477,13 +1477,17 @@ footer .foot-info{ font-size:0.72rem; color:var(--gris); font-family:monospace; 
 }
 .foto-box-titulo{
   font-family:'Archivo Black', sans-serif;
-  font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase;
-  color:var(--acento); margin-bottom:10px;
-  display:flex; align-items:center; gap:8px;
+  font-size:0.95rem; letter-spacing:0.06em; text-transform:uppercase;
+  color:var(--blanco); margin-bottom:14px;
+  display:flex; align-items:center; gap:10px;
+  padding-bottom:10px;
+  border-bottom:2px solid var(--acento);
 }
 .foto-box-titulo::before{
-  content:""; width:8px; height:8px; border-radius:50%;
+  content:""; width:10px; height:10px; border-radius:50%;
   background:var(--acento);
+  box-shadow:0 0 10px var(--acento);
+  flex-shrink:0;
 }
 .foto-muestra, .foto-uso{
   position:relative;
