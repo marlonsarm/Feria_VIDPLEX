@@ -58,7 +58,7 @@ def producto(ref_code):
 
     # Campos fijos que deben aparecer SIEMPRE, aunque falte cargar el dato.
     # No modifica la base de datos: solo completa lo que falte al momento de mostrar.
-    CAMPOS_FIJOS = ['Espesor', 'Color', 'Separador']
+    CAMPOS_FIJOS = ['Espesor', 'Separador']
     claves_existentes = [k.lower() for k, v in specs]
     for campo in CAMPOS_FIJOS:
         if campo.lower() not in claves_existentes:
