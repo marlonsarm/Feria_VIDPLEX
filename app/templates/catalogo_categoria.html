@@ -421,7 +421,7 @@ background-image:
       <div class="thumb" data-real="{{ thumb_url }}" data-fallback="{{ placeholder_actual }}" style="background-image:url('{{ thumb_url }}');background-size:cover;background-position:center;"></div>
       <div class="info-box">
       <div class="tipo-tag">{{ v.tipo_vidrio }}</div>
-      <h3>{{ v.nombre[:38] }}{% if v.nombre|length > 38 %}...{% endif %}</h3>
+      <h3>{{ v.nombre }}</h3>
       <p>{{ (v.descripcion or '')[:110] }}{% if v.descripcion and v.descripcion|length > 110 %}...{% endif %}</p>
      <div class="ver-mas"><span>Ver vidrio</span><span>&#8594;</span></div>
       </div>

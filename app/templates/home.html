@@ -17,7 +17,7 @@
   --radio:10px;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
- html{overflow-x:hidden;width:100%;touch-action:manipulation;overscroll-behavior:none;height:100%;background:#2A241E;}
+ html{overflow-x:hidden;width:100%;touch-action:pan-y;overscroll-behavior:none;height:100%;background:#2A241E;}
 .nav-main{
   display:flex; align-items:center; justify-content:space-between;
   padding:24px 50px;
@@ -908,6 +908,7 @@ background-image: linear-gradient(135deg, rgba(20,15,10,0.85), rgba(20,15,10,0.7
 <div class="lead-modal" id="leadModal">
   <div class="lead-modal-backdrop"></div>
   <div class="lead-modal-content">
+    <button type="button" class="lead-modal-x" id="leadModalClose" aria-label="Cerrar">✕</button>
 
     <div class="lead-modal-visual">
           <img src="/static/img/vidplex_edificio.png" alt="VidPlex">
@@ -1110,9 +1111,15 @@ background-image: linear-gradient(135deg, rgba(20,15,10,0.85), rgba(20,15,10,0.7
     var form = document.getElementById('homeLeadForm');
     var submitBtn = document.getElementById('homeLeadSubmit');
     if(!modal || !form) return;
-
     var yaEnvio = localStorage.getItem('vidplex_lead_enviado') === 'true';
     if(!yaEnvio) modal.classList.add('show');
+
+    var closeBtn = document.getElementById('leadModalClose');
+    if(closeBtn){
+      closeBtn.addEventListener('click', function(){
+        modal.classList.remove('show');
+      });
+    } 
 
     form.addEventListener('submit', function(e){
       e.preventDefault();

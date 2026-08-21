@@ -22,7 +22,7 @@ body{
 }
 
 *{ box-sizing:border-box; margin:0; padding:0; }
-html{ scroll-behavior:smooth; overflow-x:hidden; width:100%; touch-action:manipulation; }
+html{ scroll-behavior:smooth; overflow-x:hidden; width:100%; touch-action:pan-y; }
 body{
   background:var(--negro) url('/static/img/img%202.jpeg') center/cover fixed no-repeat;
   color:var(--blanco);
@@ -671,6 +671,15 @@ footer .foot-info{ font-size:0.72rem; color:var(--gris); font-family:monospace; 
   text-transform:uppercase; letter-spacing:0.06em;
   padding:6px 12px; border-radius:999px;
 }
+.lead-modal-x{
+  position:absolute; top:16px; right:16px; z-index:2;
+  width:34px; height:34px; border-radius:50%;
+  background:rgba(10,10,10,0.55); border:1px solid rgba(255,255,255,0.2);
+  color:#fff; font-size:1.1rem; line-height:1;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; transition:background .2s ease, transform .2s ease;
+}
+.lead-modal-x:hover{ background:rgba(228,87,46,0.85); transform:scale(1.08); }
 
 /* CUERPO DEL FORMULARIO */
 .lead-modal-body{
