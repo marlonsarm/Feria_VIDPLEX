@@ -115,7 +115,7 @@ VIDRIOS = [
     {
         "ref_code": "VP-012",
         "nombre": "DVH Design Naranja Tangerine",
-        "tipo_vidrio": "DVH Design",
+        "tipo_vidrio": "DVH",
         "descripcion": "Doble vidriado hermético en tono naranja Tangerine, línea Design con acabado de alto impacto visual.",
         "especificaciones": "[completar]",
         "imagen_principal": "/static/img/vidrios/VP-048.jpg",
@@ -165,7 +165,7 @@ VIDRIOS = [
     {
         "ref_code": "VP-017",
         "nombre": "DVH Control Solar ST-150",
-        "tipo_vidrio": "DVH Control Solar",
+        "tipo_vidrio": "DVH",
         "descripcion": "Doble vidriado hermético con vidrio de control solar ST-150, ideal para fachadas con alta exposición solar.",
         "especificaciones": "[completar]",
         "imagen_principal": "/static/img/vidrios/VP-053.jpg",
@@ -175,7 +175,7 @@ VIDRIOS = [
     {
         "ref_code": "VP-018",
         "nombre": "DVH Control Solar STB-120",
-        "tipo_vidrio": "DVH Control Solar",
+        "tipo_vidrio": "DVH",
         "descripcion": "Doble vidriado hermético con vidrio de control solar STB-120, equilibra transmisión de luz y control térmico.",
         "especificaciones": "[completar]",
         "imagen_principal": "/static/img/vidrios/VP-054.jpg",
@@ -185,7 +185,7 @@ VIDRIOS = [
     {
         "ref_code": "VP-019",
         "nombre": "DVH Alto Desempeño KNT-155",
-        "tipo_vidrio": "DVH Alto Desempeño",
+        "tipo_vidrio": "DVH",
         "descripcion": "Doble vidriado hermético con vidrio KNT-155, alto desempeño térmico y acústico para fachadas exigentes.",
         "especificaciones": "[completar]",
         "imagen_principal": "/static/img/vidrios/VP-055.jpg",
@@ -245,7 +245,7 @@ VIDRIOS = [
     {
         "ref_code": "VP-025",
         "nombre": "DVH Control Solar ST-167",
-        "tipo_vidrio": "DVH Control Solar",
+        "tipo_vidrio": "DVH",
         "descripcion": "Doble vidriado hermético con vidrio de control solar ST-167, reduce la ganancia de calor solar manteniendo claridad.",
         "especificaciones": "[completar]",
         "imagen_principal": "/static/img/vidrios/VP-061.jpg",
@@ -255,7 +255,7 @@ VIDRIOS = [
     {
         "ref_code": "VP-026",
         "nombre": "DVH Control Solar ST-150 Grendo",
-        "tipo_vidrio": "DVH Control Solar",
+        "tipo_vidrio": "DVH",
         "descripcion": "Doble vidriado hermético con vidrio de control solar ST-150 Grendo, ideal para fachadas con alta exposición solar.",
         "especificaciones": "[completar]",
         "imagen_principal": "/static/img/vidrios/VP-062.jpg",
@@ -265,7 +265,7 @@ VIDRIOS = [
     {
         "ref_code": "VP-027",
         "nombre": "DVH Control Solar KNT-155",
-        "tipo_vidrio": "DVH Control Solar",
+        "tipo_vidrio": "DVH",
         "descripcion": "Doble vidriado hermético con vidrio de control solar KNT-155, alto desempeño térmico y acústico para fachadas exigentes.",
         "especificaciones": "[completar]",
         "imagen_principal": "/static/img/vidrios/VP-063.jpg",
@@ -275,7 +275,7 @@ VIDRIOS = [
     {
         "ref_code": "VP-028",
         "nombre": "DVH Design Naranja Tangerine",
-        "tipo_vidrio": "DVH Design",
+        "tipo_vidrio": "DVH",
         "descripcion": "Doble vidriado hermético en tono naranja Tangerine, línea Design con acabado de alto impacto visual.",
         "especificaciones": "[completar]",
         "imagen_principal": "/static/img/vidrios/VP-064.jpg",
@@ -285,7 +285,7 @@ VIDRIOS = [
     {
         "ref_code": "VP-029",
         "nombre": "DVH Control Solar ST-150",
-        "tipo_vidrio": "DVH Control Solar",
+        "tipo_vidrio": "DVH",
         "descripcion": "Doble vidriado hermético con vidrio de control solar ST-150, ideal para fachadas con alta exposición solar.",
         "especificaciones": "[completar]",
         "imagen_principal": "/static/img/vidrios/VP-065.jpg",
@@ -295,7 +295,7 @@ VIDRIOS = [
     {
         "ref_code": "VP-030",
         "nombre": "DVH Alto Desempeño ST-167",
-        "tipo_vidrio": "DVH Alto Desempeño",
+        "tipo_vidrio": "DVH",
         "descripcion": "Doble vidriado hermético con vidrio de control solar ST-167, reduce la ganancia de calor solar manteniendo claridad y desempeño.",
         "especificaciones": "[completar]",
         "imagen_principal": "/static/img/vidrios/VP-066.jpg",
@@ -315,7 +315,7 @@ VIDRIOS = [
     {
         "ref_code": "VP-032",
         "nombre": "DVH Control Solar ST-150",
-        "tipo_vidrio": "DVH Control Solar",
+        "tipo_vidrio": "DVH",
         "descripcion": "Doble vidriado hermético con vidrio de control solar ST-150, ideal para fachadas con alta exposición solar.",
         "especificaciones": "[completar]",
         "imagen_principal": "/static/img/vidrios/VP-068.jpg",
@@ -355,7 +355,7 @@ VIDRIOS = [
     {
         "ref_code": "VP-036",
         "nombre": "DVH Control Solar ST-120",
-        "tipo_vidrio": "DVH Control Solar",
+        "tipo_vidrio": "DVH",
         "descripcion": "Doble vidriado hermético con vidrio de control solar ST-120, equilibra transmisión de luz y control térmico.",
         "especificaciones": "[completar]",
         "imagen_principal": "/static/img/vidrios/VP-072.jpg",
@@ -365,7 +365,7 @@ VIDRIOS = [
     {
         "ref_code": "VP-037",
         "nombre": "DVH Alto Desempeño ST-120",
-        "tipo_vidrio": "DVH Alto Desempeño",
+        "tipo_vidrio": "DVH",
         "descripcion": "Doble vidriado hermético con vidrio de control solar ST-120, equilibra transmisión de luz y control térmico para proyectos de alto desempeño.",
         "especificaciones": "[completar]",
         "imagen_principal": "/static/img/vidrios/VP-073.jpg",
@@ -375,7 +375,7 @@ VIDRIOS = [
     {
         "ref_code": "VP-038",
         "nombre": "DVH Alto Desempeño KNT-155",
-        "tipo_vidrio": "DVH Alto Desempeño",
+        "tipo_vidrio": "DVH",
         "descripcion": "Doble vidriado hermético con vidrio KNT-155, alto desempeño térmico y acústico para fachadas exigentes.",
         "especificaciones": "[completar]",
         "imagen_principal": "/static/img/vidrios/VP-074.jpg",
