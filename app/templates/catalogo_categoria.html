@@ -417,7 +417,7 @@ background-image:
     {% for v in vidrios %}
     {% set placeholder_actual = placeholders[loop.index0 % placeholders|length] %}
    <a href="/producto/{{ v.ref_code }}" class="vidrio-card" style="text-decoration:none;color:inherit;">
-{% set thumb_url = v.imagen_principal if v.imagen_principal and v.imagen_principal.startswith('http') else (url_for('static', filename='img/productos/' + v.imagen_principal) if v.imagen_principal else placeholder_actual) %}
+{% set thumb_url = v.imagen_principal if v.imagen_principal else placeholder_actual %}
       <div class="thumb" data-real="{{ thumb_url }}" data-fallback="{{ placeholder_actual }}" style="background-image:url('{{ thumb_url }}');background-size:cover;background-position:center;"></div>
       <div class="info-box">
       <div class="tipo-tag">{{ v.tipo_vidrio }}</div>
