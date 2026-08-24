@@ -40,7 +40,8 @@
       <p>Explora cada detalle de este vidrio</p>
     </div>
     {% set foto_muestra = producto.imagen_principal if producto.imagen_principal else '/static/img/img%201.jpeg' %}
-    {% set foto_uso = ('/static/img/' + media[0].url) if media and media|length > 0 else '/static/img/img%202.jpeg' %}
+    {% set foto_uso_list = media | selectattr('orden', 'equalto', 2) | list %}
+    {% set foto_uso = foto_uso_list[0].url if foto_uso_list else '/static/img/img%202.jpeg' %}
     <div class="duo-fotos">
       <div class="foto-muestra">
         <span class="foto-badge">Muestra del vidrio</span>
