@@ -1,12 +1,19 @@
 # Exportado automaticamente desde la base de datos real.
 # Total de vidrios encontrados: 41
 #
-# NOTA: Unicamente se modificaron los campos "imagen_principal" de los
-# vidrios indicados por el cliente (colores: Azul Median Blue, Azul Oceano,
+# NOTA: Se modificaron los campos "imagen_principal" de los vidrios
+# indicados por el cliente (colores: Azul Median Blue, Azul Oceano,
 # Blanco, Incoloro, Naranja Tangerine, Rojo Dip, Violeta, Verde estructural,
-# Verde esmeralda y Gris Asahi/Medium). El resto de vidrios y todos los
-# demas campos (nombre, descripcion, especificaciones, categoria, activo)
-# quedan exactamente iguales al archivo original.
+# Verde esmeralda y Gris Asahi/Medium). Ademas, a esos mismos 25 productos
+# se les agrego el campo "imagen_en_uso", que es la foto que se muestra
+# en la seccion "En uso" del detalle de producto (la version con "HH"
+# en el nombre del archivo). Los productos que NO tienen ese color
+# confirmado no tienen este campo (queda ausente / None), y por lo tanto
+# el script NO les crea ni modifica su producto_media.
+#
+# El resto de vidrios y todos los demas campos (nombre, descripcion,
+# especificaciones, categoria, activo) quedan exactamente iguales al
+# archivo original.
 #
 # Las imagenes correspondientes van dentro de la carpeta
 # static/img/vidrios/ del proyecto, con esos nombres exactos
@@ -30,6 +37,7 @@ VIDRIOS = [
         "descripcion": "Doble vidriado hermético en tono blanco, ideal para espacios luminosos que buscan confort térmico y acústico.",
         "especificaciones": "Composición: 44.1/S16/5FT | Espesor: 29.3mm | Color: Blanco | Separador: Swisspacer S16",
         "imagen_principal": "/static/img/vidrios/blanco%202.png",
+        "imagen_en_uso": "/static/img/vidrios/blanco%201%20%20HH.png",
         "categoria": "confort",
         "activo": 1,
     },
@@ -50,6 +58,7 @@ VIDRIOS = [
         "descripcion": "Doble vidriado hermético en tono azul océano, aporta frescura visual manteniendo el confort térmico del espacio.",
         "especificaciones": "Composición: 44.1/S10/5FT | Espesor: 23.3mm | Color: Azul Océano | Separador: Swisspacer S10",
         "imagen_principal": "/static/img/vidrios/azul%20ocean%202.png",
+        "imagen_en_uso": "/static/img/vidrios/azul%20ocean%201%20HH.png",
         "categoria": "confort",
         "activo": 1,
     },
@@ -60,6 +69,7 @@ VIDRIOS = [
         "descripcion": "Doble vidriado hermético en tono Median Blue, combina diseño contemporáneo con desempeño térmico.",
         "especificaciones": "Composición: 44.1/S12/5FT | Espesor: 25.3mm | Color: Median Blue | Separador: Swisspacer S12",
         "imagen_principal": "/static/img/vidrios/azul%20medium%202.png",
+        "imagen_en_uso": "/static/img/vidrios/azul%20medium%201%20HH.png",
         "categoria": "confort",
         "activo": 1,
     },
@@ -70,6 +80,7 @@ VIDRIOS = [
         "descripcion": "Doble vidriado hermético en tono violeta, para fachadas y espacios con identidad visual distintiva.",
         "especificaciones": "Composición: 44.1/S16/5FT | Espesor: 29.3mm | Color: Violeta | Separador: Swisspacer S16",
         "imagen_principal": "/static/img/vidrios/violeta%201.png",
+        "imagen_en_uso": "/static/img/vidrios/violeta%202%20HH.png",
         "categoria": "arquitectonico",
         "activo": 1,
     },
@@ -80,6 +91,7 @@ VIDRIOS = [
         "descripcion": "Doble vidriado hermético en tono gris Medium, aporta sobriedad y control de luminosidad manteniendo el confort térmico y acústico del espacio.",
         "especificaciones": "Composición: 44.1/S16/5FT | Espesor: 29.3mm | Color: Gris Medium | Separador: Swisspacer S16",
         "imagen_principal": "/static/img/vidrios/gris%20asahi%201.png",
+        "imagen_en_uso": "/static/img/vidrios/gris%20asahi%202%20HH.png",
         "categoria": "confort",
         "activo": 1,
     },
@@ -90,6 +102,7 @@ VIDRIOS = [
         "descripcion": "Doble vidriado hermético en tono gris Asahi, combina elegancia y control de luminosidad para espacios de confort residencial.",
         "especificaciones": "Composición: 44.1/S16/5FT | Espesor: 29.3mm | Color: Gris Asahi | Separador: Swisspacer S16",
         "imagen_principal": "/static/img/vidrios/gris%20asahi%201.png",
+        "imagen_en_uso": "/static/img/vidrios/gris%20asahi%202%20HH.png",
         "categoria": "confort",
         "activo": 1,
     },
@@ -100,6 +113,7 @@ VIDRIOS = [
         "descripcion": "Doble vidriado hermético en tono gris Medium, aporta sobriedad y control de luminosidad sin sacrificar el confort térmico y acústico.",
         "especificaciones": "Composición: 44.1/S16/5FT | Espesor: 29.3mm | Color: Gris Medium | Separador: Swisspacer S16",
         "imagen_principal": "/static/img/vidrios/gris%20asahi%201.png",
+        "imagen_en_uso": "/static/img/vidrios/gris%20asahi%202%20HH.png",
         "categoria": "confort",
         "activo": 1,
     },
@@ -110,6 +124,7 @@ VIDRIOS = [
         "descripcion": "Doble vidriado hermético en tono violeta, para fachadas y espacios con identidad visual distintiva.",
         "especificaciones": "Composición: 44.1/S16/5FT | Espesor: 29.3mm | Color: Violeta | Separador: Swisspacer S16",
         "imagen_principal": "/static/img/vidrios/violeta%201.png",
+        "imagen_en_uso": "/static/img/vidrios/violeta%202%20HH.png",
         "categoria": "arquitectonico",
         "activo": 1,
     },
@@ -120,6 +135,7 @@ VIDRIOS = [
         "descripcion": "Doble vidriado hermético en tono verde, aporta un aire natural al espacio sin perder desempeño térmico.",
         "especificaciones": "Composición: 44.1/S16/5FT | Espesor: 29.3mm | Color: Verde | Separador: Swisspacer S16",
         "imagen_principal": "/static/img/vidrios/verde%20dvh%20estructural%202.png",
+        "imagen_en_uso": "/static/img/vidrios/verde%20dvh%20estructural%20%201%20HH.png",
         "categoria": "arquitectonico",
         "activo": 1,
     },
@@ -130,6 +146,7 @@ VIDRIOS = [
         "descripcion": "Doble vidriado hermético en tono naranja Tangerine, línea Design con acabado de alto impacto visual.",
         "especificaciones": "Composición: 44.1/S10/5FT | Espesor: 23.3mm | Color: Naranja Tangerine | Separador: Swisspacer S10",
         "imagen_principal": "/static/img/vidrios/naranja%20tangerin%202.png",
+        "imagen_en_uso": "/static/img/vidrios/naranja%20tangerin%201%20HH.png",
         "categoria": "design",
         "activo": 1,
     },
@@ -140,6 +157,7 @@ VIDRIOS = [
         "descripcion": "Doble vidriado hermético en tono verde con intercalar SPVP, combina estética natural y desempeño térmico para espacios de confort.",
         "especificaciones": "Composición: 44.5/S16/5FT | Espesor: 30.5mm | Color: Verde | Separador: Swisspacer S16",
         "imagen_principal": "/static/img/vidrios/verde%20esmeralda%201.jpeg",
+        "imagen_en_uso": "/static/img/vidrios/verde%20esmeralda%202%20HH.jpeg",
         "categoria": "confort",
         "activo": 1,
     },
@@ -150,6 +168,7 @@ VIDRIOS = [
         "descripcion": "Doble vidriado hermético en tono verde con intercalar SPVP, combina estética natural y desempeño térmico para espacios de confort.",
         "especificaciones": "Composición: 44.5/S16/5FT | Espesor: 30.5mm | Color: Verde | Separador: Swisspacer S16",
         "imagen_principal": "/static/img/vidrios/verde%20esmeralda%201.jpeg",
+        "imagen_en_uso": "/static/img/vidrios/verde%20esmeralda%202%20HH.jpeg",
         "categoria": "confort",
         "activo": 1,
     },
@@ -160,6 +179,7 @@ VIDRIOS = [
         "descripcion": "Doble vidriado hermético incoloro, para máxima transparencia sin sacrificar el confort térmico y acústico.",
         "especificaciones": "Composición: 44.1/S16/5FT | Espesor: 29.3mm | Color: Incoloro | Separador: Swisspacer S16",
         "imagen_principal": "/static/img/vidrios/incoloro%202.png",
+        "imagen_en_uso": "/static/img/vidrios/incoloro%201%20HH.png",
         "categoria": "confort",
         "activo": 1,
     },
@@ -170,6 +190,7 @@ VIDRIOS = [
         "descripcion": "Doble vidriado hermético en tono gris Median, aporta sobriedad y control de luminosidad al espacio.",
         "especificaciones": "Composición: 44.1/S16/5FT | Espesor: 29.3mm | Color: Gris Median | Separador: Swisspacer S16",
         "imagen_principal": "/static/img/vidrios/gris%20asahi%201.png",
+        "imagen_en_uso": "/static/img/vidrios/gris%20asahi%202%20HH.png",
         "categoria": "confort",
         "activo": 1,
     },
@@ -210,6 +231,7 @@ VIDRIOS = [
         "descripcion": "Doble vidriado hermético en tono verde, aporta un aire natural al espacio sin perder desempeño térmico.",
         "especificaciones": "Composición: 44.1/S16/5FT | Espesor: 29.3mm | Color: Verde | Separador: Swisspacer S16",
         "imagen_principal": "/static/img/vidrios/verde%20dvh%20estructural%202.png",
+        "imagen_en_uso": "/static/img/vidrios/verde%20dvh%20estructural%20%201%20HH.png",
         "categoria": "arquitectonico",
         "activo": 1,
     },
@@ -220,6 +242,7 @@ VIDRIOS = [
         "descripcion": "Doble vidriado hermético en tono rojo Dip, para proyectos que buscan un acento de color audaz.",
         "especificaciones": "Composición: 44.1/S16/5FT | Espesor: 29.3mm | Color: Rojo Dip | Separador: Swisspacer S16",
         "imagen_principal": "/static/img/vidrios/rojo%20dip%201.png",
+        "imagen_en_uso": "/static/img/vidrios/rojo%20dip%202%20HH.png",
         "categoria": "arquitectonico",
         "activo": 1,
     },
@@ -240,6 +263,7 @@ VIDRIOS = [
         "descripcion": "Doble vidriado hermético en tono gris Asahi, combina elegancia y control de luminosidad.",
         "especificaciones": "Composición: 44.1/S16/5FT | Espesor: 29.3mm | Color: Gris Asahi | Separador: Swisspacer S16",
         "imagen_principal": "/static/img/vidrios/gris%20asahi%201.png",
+        "imagen_en_uso": "/static/img/vidrios/gris%20asahi%202%20HH.png",
         "categoria": "confort",
         "activo": 1,
     },
@@ -290,6 +314,7 @@ VIDRIOS = [
         "descripcion": "Doble vidriado hermético en tono naranja Tangerine, línea Design con acabado de alto impacto visual.",
         "especificaciones": "Composición: 44.1/S20/5FT | Espesor: 33.3mm | Color: Naranja Tangerine | Separador: Swisspacer S20",
         "imagen_principal": "/static/img/vidrios/naranja%20tangerin%202.png",
+        "imagen_en_uso": "/static/img/vidrios/naranja%20tangerin%201%20HH.png",
         "categoria": "design",
         "activo": 1,
     },
@@ -320,6 +345,7 @@ VIDRIOS = [
         "descripcion": "Doble vidriado hermético en tono verde, aporta un aire natural al espacio sin perder desempeño térmico.",
         "especificaciones": "Composición: 44.1/S16/5FT | Espesor: 29.3mm | Color: Verde | Separador: Swisspacer S16",
         "imagen_principal": "/static/img/vidrios/verde%20dvh%20estructural%202.png",
+        "imagen_en_uso": "/static/img/vidrios/verde%20dvh%20estructural%20%201%20HH.png",
         "categoria": "arquitectonico",
         "activo": 1,
     },
@@ -340,6 +366,7 @@ VIDRIOS = [
         "descripcion": "Doble vidriado hermético en tono blanco, ideal para espacios luminosos que buscan confort térmico y acústico.",
         "especificaciones": "Composición: 44.1/S16/5FT | Espesor: 29.3mm | Color: Blanco | Separador: Swisspacer S16",
         "imagen_principal": "/static/img/vidrios/blanco%202.png",
+        "imagen_en_uso": "/static/img/vidrios/blanco%201%20%20HH.png",
         "categoria": "confort",
         "activo": 1,
     },
@@ -350,6 +377,7 @@ VIDRIOS = [
         "descripcion": "Doble vidriado hermético en tono rojo Dip, para proyectos que buscan un acento de color audaz.",
         "especificaciones": "Composición: 44.1/S16/5FT | Espesor: 29.3mm | Color: Rojo Dip | Separador: Swisspacer S16",
         "imagen_principal": "/static/img/vidrios/rojo%20dip%201.png",
+        "imagen_en_uso": "/static/img/vidrios/rojo%20dip%202%20HH.png",
         "categoria": "arquitectonico",
         "activo": 1,
     },
@@ -360,6 +388,7 @@ VIDRIOS = [
         "descripcion": "Doble vidriado hermético en tono azul Median Blue, combina diseño contemporáneo con desempeño térmico.",
         "especificaciones": "Composición: 44.1/S12/5FT | Espesor: 25.3mm | Color: Median Blue | Separador: Swisspacer S12",
         "imagen_principal": "/static/img/vidrios/azul%20medium%202.png",
+        "imagen_en_uso": "/static/img/vidrios/azul%20medium%201%20HH.png",
         "categoria": "confort",
         "activo": 1,
     },
@@ -400,6 +429,7 @@ VIDRIOS = [
         "descripcion": "Doble vidriado hermético en tono blanco, ideal para espacios luminosos que buscan confort térmico y acústico.",
         "especificaciones": "Composición: 44.1/S16/5FT | Espesor: 29.3mm | Color: Blanco | Separador: Swisspacer S16",
         "imagen_principal": "/static/img/vidrios/blanco%202.png",
+        "imagen_en_uso": "/static/img/vidrios/blanco%201%20%20HH.png",
         "categoria": "confort",
         "activo": 1,
     },
@@ -410,6 +440,7 @@ VIDRIOS = [
         "descripcion": "Doble vidriado hermético en tono gris Asahi, combina elegancia y control de luminosidad.",
         "especificaciones": "Composición: 44.1/S16/5FT | Espesor: 29.3mm | Color: Gris Asahi | Separador: Swisspacer S16",
         "imagen_principal": "/static/img/vidrios/gris%20asahi%201.png",
+        "imagen_en_uso": "/static/img/vidrios/gris%20asahi%202%20HH.png",
         "categoria": "confort",
         "activo": 1,
     },
@@ -420,6 +451,7 @@ VIDRIOS = [
         "descripcion": "Doble vidriado hermético incoloro, para máxima transparencia sin sacrificar el confort térmico y acústico.",
         "especificaciones": "Composición: 44.1/S16/5FT | Espesor: 29.3mm | Color: Incoloro | Separador: Swisspacer S16",
         "imagen_principal": "/static/img/vidrios/incoloro%202.png",
+        "imagen_en_uso": "/static/img/vidrios/incoloro%201%20HH.png",
         "categoria": "confort",
         "activo": 1,
     },

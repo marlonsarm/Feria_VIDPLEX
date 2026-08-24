@@ -45,7 +45,7 @@ with app.app_context():
             producto_id = cur.lastrowid
             print(f"Insertado: {v['ref_code']}")
 
-        en_uso_url = MEDIA_MAP.get(v["imagen_principal"])
+        en_uso_url = v.get("imagen_en_uso")
         if en_uso_url:
             cur.execute("""
                 DELETE FROM producto_media 
