@@ -226,7 +226,7 @@ def _agregar_logo(img_qr):
     placa.paste(logo, (pad_x, pad_y), logo)
     img_qr.alpha_composite(placa, ((qr_w - card_w) // 2, (qr_h - card_h) // 2))
     return img_qr
-def _agregar_marco_y_texto(img_qr, texto):
+def _agregar_marco_y_texto(img_qr, texto, pegado_arriba=False):
     """Arma la tarjeta final: fondo plateado degradado continuo (QR + texto
     en una sola pieza, sin costuras) con borde negro fino alrededor.
     Si FONDO_TRANSPARENTE=True, en cambio, todo el fondo queda
@@ -256,7 +256,10 @@ def _agregar_marco_y_texto(img_qr, texto):
         fuente = _cargar_fuente(fuente.size - 2)
 
     alto_linea = fuente.size + 10
-    y_texto = MARGEN_MARCO + qr_h + (ALTO_FRANJA_TEXTO - alto_linea * len(lineas)) // 2
+    if pegado_arriba:
+        y_texto = MARGEN_MARCO + qr_h - 18
+    else:
+        y_texto = MARGEN_MARCO + qr_h + (ALTO_FRANJA_TEXTO - alto_linea * len(lineas)) // 2
 
     for linea in lineas:
         bbox = draw.textbbox((0, 0), linea, font=fuente)
@@ -387,7 +390,7 @@ def generar_qr_home(texto="VIDPLEX transformó este vidrio, Escaneáme!"):
         placa.paste(logo, (pad_x, pad_y), logo)
         img.alpha_composite(placa, ((qr_w - card_w) // 2, (qr_h - card_h) // 2))
 
-    tarjeta_final = _agregar_marco_y_texto(img, texto)
+    tarjeta_final = _agregar_marco_y_texto(img, texto, pegado_arriba=True)
 
     os.makedirs(OUT_DIR, exist_ok=True)
     out_path = os.path.join(OUT_DIR, "home.png")
