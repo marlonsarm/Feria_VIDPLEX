@@ -1,11 +1,11 @@
-"""
-Genera un PDF de una sola pagina con el QR de Home (home.png) en un
-tamano exacto de 10x10 cm, listo para imprimir.
+﻿"""
+Genera un PDF con varios QR de Home (home.png) en tamano exacto de
+13x13 cm cada uno, 4 QRs por hoja (2x2), listo para imprimir.
 
 Uso:
-    python scripts/generar_pdf_home_10x10.py
+    python scripts/generar_pdf_home_13x13.py
 
-El PDF queda en: qr_generados/Home_QR_10x10.pdf
+El PDF queda en: qr_generados/Home_QR_13x13_CMYK.pdf
 """
 import os
 import numpy as np
@@ -25,7 +25,7 @@ COLUMNAS = 2            # QRs por fila
 FILAS = 2                # QRs por columna
 POR_PAGINA = COLUMNAS * FILAS   # 4 QRs por hoja
 TOTAL_QR = 30             # cuantos QRs en TOTAL quieres (no hojas)
-CANTIDAD_PAGINAS = -(-TOTAL_QR // POR_PAGINA)  # calcula hojas necesarias (redondeando hacia arriba)
+CANTIDAD_PAGINAS = -(-TOTAL_QR // POR_PAGINA)  # hojas necesarias (redondeo hacia arriba)
 PAGINA_ANCHO = TAMANO * COLUMNAS
 PAGINA_ALTO = TAMANO * FILAS
 

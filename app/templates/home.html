@@ -906,7 +906,6 @@ background-image: linear-gradient(135deg, rgba(20,15,10,0.85), rgba(20,15,10,0.7
 <div class="lead-modal" id="leadModal">
   <div class="lead-modal-backdrop"></div>
   <div class="lead-modal-content">
-    <button type="button" class="lead-modal-x" id="leadModalClose" aria-label="Cerrar">✕</button>
 
     <div class="lead-modal-visual">
           <img src="/static/img/vidplex_edificio.png" alt="VidPlex">
@@ -1112,12 +1111,7 @@ background-image: linear-gradient(135deg, rgba(20,15,10,0.85), rgba(20,15,10,0.7
     var yaTieneDatos = localStorage.getItem('vidplex_lead_datos') !== null;
     if(!yaTieneDatos) modal.classList.add('show');
 
-    var closeBtn = document.getElementById('leadModalClose');
-    if(closeBtn){
-      closeBtn.addEventListener('click', function(){
-        modal.classList.remove('show');
-      });
-    } 
+ 
 
     form.addEventListener('submit', function(e){
       e.preventDefault();
