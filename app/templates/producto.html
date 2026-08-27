@@ -355,10 +355,38 @@
   const form = document.getElementById('modalLeadForm');
   const success = document.getElementById('modalSuccess');
   const submitBtn = document.getElementById('modalSubmitBtn');
+  const refCodeEl = document.getElementById('modalRefCode');
+  const refCode = refCodeEl ? refCodeEl.value : '';
 
-  // Solo se muestra si el visitante aun no ha dejado sus datos en NINGUN vidrio
-  var yaEnvioDatos = localStorage.getItem('vidplex_lead_enviado') === 'true';
-  if(modal && !yaEnvioDatos) modal.classList.add('show');
+  function obtenerDatosGuardados(){
+    try {
+      var raw = localStorage.getItem('vidplex_lead_datos');
+      if(raw) return JSON.parse(raw);
+    } catch(e){}
+    return null;
+  }
+
+  var datosGuardados = obtenerDatosGuardados();
+
+  if(datosGuardados && refCode){
+    // Ya tenemos sus datos de una visita anterior: vinculamos este vidrio
+    // nuevo en segundo plano, sin mostrarle el formulario otra vez.
+    fetch('/leads', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        ref_code: refCode,
+        nombre: datosGuardados.nombre,
+        telefono: datosGuardados.telefono,
+        correo: datosGuardados.correo,
+        autorizo_datos: true,
+        tipo_proyecto: datosGuardados.tipo_proyecto || '',
+        vinculacion_automatica: true
+      })
+    }).catch(function(){ /* silencioso: si falla, no interrumpe la visita */ });
+  } else if(modal && !datosGuardados){
+    modal.classList.add('show');
+  }
 
   var closeBtnProducto = document.getElementById('leadModalCloseProducto');
   if(closeBtnProducto){
@@ -388,7 +416,7 @@
       if(!autorizo){ alert('Debes autorizar el tratamiento de datos.'); return; }
       
      const data = {
-        ref_code: document.getElementById('modalRefCode').value,
+        ref_code: refCode,
         nombre: nombre,
         telefono: telefono,
         correo: correo,
@@ -410,8 +438,12 @@
         // Mostrar nombre personalizado
         var nombreEnviado = document.getElementById('modalNombre').value.trim().split(' ')[0];
         document.getElementById('successNombre').textContent = nombreEnviado;
-        // Guardar en localStorage para no volver a mostrar
-               localStorage.setItem('vidplex_lead_enviado', 'true');
+        // Guardar datos completos en localStorage (para vincular
+        // automáticamente futuros vidrios sin volver a preguntar)
+        localStorage.setItem('vidplex_lead_datos', JSON.stringify({
+          nombre: nombre, telefono: telefono, correo: correo, tipo_proyecto: ''
+        }));
+        localStorage.setItem('vidplex_lead_enviado', 'true');
         setTimeout(function(){ cerrarLeadModal(); }, 2500);
       })
       .catch(function(err){

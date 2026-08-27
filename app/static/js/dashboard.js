@@ -65,6 +65,10 @@
       if (!res.ok) throw new Error('error de red');
       const data = await res.json();
       document.getElementById('totalLeadsHint').textContent = data.total_leads + ' contacto(s) capturados en total';
+      var elEscaneosHome = document.getElementById('escaneosHomeValor');
+      if (elEscaneosHome) {
+        elEscaneosHome.textContent = data.escaneos_home;
+      }
       renderTabla(data.leads);
       renderChart(data.ranking);
     } catch (e) {

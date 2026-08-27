@@ -75,6 +75,10 @@ def home():
     db = get_db()
     cur = db.cursor()
 
+    # Registra el escaneo del QR de Home (sin producto asociado),
+    # igual que se hace con cada vidrio individual.
+    cur.execute("INSERT INTO escaneos (producto_id) VALUES (NULL)")
+    db.commit()
 
     cur.execute("SELECT ref_code, nombre, tipo_vidrio, descripcion, imagen_principal FROM productos WHERE activo = 1 ORDER BY nombre")
     vidrios = cur.fetchall()
@@ -129,6 +133,7 @@ def crear_lead():
     tipo_proyecto = data.get('tipo_proyecto') or None
     autorizo = str(data.get('autorizo_datos', '')).lower() in ('1', 'true', 'on', 'si')
     ref_code = (data.get('ref_code') or '').strip()
+    vinculacion_automatica = str(data.get('vinculacion_automatica', '')).lower() in ('1', 'true')
     
     # HONEYPOT: campo invisible para humanos, si se llena = bot
     honeypot = (data.get('website') or '').strip()
@@ -136,12 +141,16 @@ def crear_lead():
         # Rechazo silencioso: el bot no sabe que fallo
         return jsonify({'ok': True}), 200
 
-        # Rate limiting por telefono (anti doble-clic, no bloquea usuarios reales)
-    ahora = datetime.now(BOGOTA_TZ).timestamp()
-    ultimo_envio = _rate_limit_cache.get(telefono, 0)
-    if ahora - ultimo_envio < RATE_LIMIT_SECONDS:
-        return jsonify({'ok': False, 'error': 'Por favor espera unos segundos antes de reenviar.'}), 429
-    _rate_limit_cache[telefono] = ahora
+    # Rate limiting por telefono (anti doble-clic, no bloquea usuarios reales).
+    # Se salta cuando es una vinculacion automatica en segundo plano (la persona
+    # ya llenó el formulario antes y solo estamos anotando un vidrio nuevo que vio,
+    # puede pasar varias veces seguidas si escanea varios vidrios rápido).
+    if not vinculacion_automatica:
+        ahora = datetime.now(BOGOTA_TZ).timestamp()
+        ultimo_envio = _rate_limit_cache.get(telefono, 0)
+        if ahora - ultimo_envio < RATE_LIMIT_SECONDS:
+            return jsonify({'ok': False, 'error': 'Por favor espera unos segundos antes de reenviar.'}), 429
+        _rate_limit_cache[telefono] = ahora
 
     # Validación en servidor — nunca confiar solo en el frontend
     errores = {}
@@ -279,6 +288,9 @@ def admin_data():
     """)
     ranking = cur.fetchall()
 
+    cur.execute("SELECT COUNT(*) AS total FROM escaneos WHERE producto_id IS NULL")
+    escaneos_home = cur.fetchone()['total']
+
     cur.execute("""
         SELECT l.id, l.nombre, l.telefono, l.correo, l.tipo_proyecto, l.fecha_creacion,
                GROUP_CONCAT(p.ref_code ORDER BY p.ref_code SEPARATOR ', ') AS productos
@@ -292,7 +304,12 @@ def admin_data():
     for row in leads:
         row['fecha_creacion'] = row['fecha_creacion'].strftime('%Y-%m-%d %H:%M')
 
-    return jsonify({'ranking': ranking, 'leads': leads, 'total_leads': len(leads)})
+    return jsonify({
+        'ranking': ranking,
+        'leads': leads,
+        'total_leads': len(leads),
+        'escaneos_home': escaneos_home,
+    })
 
 
 @bp.route('/admin/export.xlsx')

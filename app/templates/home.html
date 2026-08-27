@@ -1109,8 +1109,8 @@ background-image: linear-gradient(135deg, rgba(20,15,10,0.85), rgba(20,15,10,0.7
     var form = document.getElementById('homeLeadForm');
     var submitBtn = document.getElementById('homeLeadSubmit');
     if(!modal || !form) return;
-    var yaEnvio = localStorage.getItem('vidplex_lead_enviado') === 'true';
-    if(!yaEnvio) modal.classList.add('show');
+    var yaTieneDatos = localStorage.getItem('vidplex_lead_datos') !== null;
+    if(!yaTieneDatos) modal.classList.add('show');
 
     var closeBtn = document.getElementById('leadModalClose');
     if(closeBtn){
@@ -1140,6 +1140,9 @@ background-image: linear-gradient(135deg, rgba(20,15,10,0.85), rgba(20,15,10,0.7
       })
       .then(function(r){ return r.json(); })
       .then(function(res){
+        localStorage.setItem('vidplex_lead_datos', JSON.stringify({
+          nombre: nombre, telefono: telefono, correo: correo, tipo_proyecto: ''
+        }));
         localStorage.setItem('vidplex_lead_enviado', 'true');
         modal.classList.remove('show');
       })
