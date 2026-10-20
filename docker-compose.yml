@@ -1,0 +1,40 @@
+# Feria VIDPLEX (landing Expocamacol) en el servidor de la empresa.
+# Las claves van en el archivo .env del servidor (nunca en GitHub).
+services:
+  db:
+    image: mysql:8.0
+    container_name: feria-mysql
+    restart: unless-stopped
+    command: ["--performance-schema=OFF", "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci"]
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      TZ: America/Bogota
+    volumes:
+      - feria_datos:/var/lib/mysql
+    mem_limit: 512m
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  web:
+    build: .
+    container_name: feria-web
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DB_HOST: db
+      DB_PORT: "3306"
+    ports:
+      - "8090:8000"
+    mem_limit: 256m
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  feria_datos:
